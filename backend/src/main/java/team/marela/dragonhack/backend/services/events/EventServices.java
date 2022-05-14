@@ -33,8 +33,8 @@ public class EventServices {
                 new HashSet<>(eventDayRepository.saveAll(
                         dto.getDates().stream()
                                 .map(e -> EventDayEntity.builder()
-                                        .eventStart(e.getStartTime())
-                                        .eventEnd(e.getEndTime())
+                                        .eventStart(e.getEventStart())
+                                        .eventEnd(e.getEventEnd())
                                         .event(savedEvent)
                                         .build()
                                 )
