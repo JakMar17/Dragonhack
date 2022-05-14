@@ -32,6 +32,9 @@ public class EventEntity {
     @Column(nullable = false)
     private String trr;
 
+    @Lob
+    private String image;
+
     @OneToMany(mappedBy = "event")
     private Set<EventDayEntity> eventDays;
 
@@ -50,8 +53,8 @@ public class EventEntity {
     @OneToMany(mappedBy = "event")
     private Set<PriceItemEntity> priceMenu;
 
-    @OneToMany(mappedBy = "event")
-    private Set<CardTemplateEntity> cardTemplates;
+    @OneToOne(mappedBy = "event")
+    private CardTemplateEntity cardTemplate;
 
     @OneToMany(mappedBy = "event")
     private Set<CardEntity> cards;

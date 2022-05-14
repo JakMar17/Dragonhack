@@ -1,19 +1,20 @@
 package team.marela.dragonhack.backend.api.app.users;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.marela.dragonhack.backend.api.models.RegisterDto;
-import team.marela.dragonhack.backend.api.models.UserDto;
-import team.marela.dragonhack.backend.database.entities.users.UserEntity;
+import team.marela.dragonhack.backend.api.models.users.RegisterDto;
+import team.marela.dragonhack.backend.api.models.users.UserDto;
 import team.marela.dragonhack.backend.services.users.LoginRegisterServices;
 import team.marela.dragonhack.backend.services.users.SessionServices;
 
 import javax.validation.Valid;
 
+@Log
 @RestController
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class RegisterApi {
 
     @PostMapping
     public UserDto registerNewUser(@RequestBody @Valid RegisterDto user) {
+        log.info("Register");
         var entity = loginRegisterServices.registerNewUser(user);
         var dto = modelMapper.map(entity, UserDto.class);
         dto.setSessionId(sessionServices.generateSessionId(entity));

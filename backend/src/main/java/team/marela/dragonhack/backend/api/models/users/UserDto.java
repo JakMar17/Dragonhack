@@ -1,13 +1,11 @@
-package team.marela.dragonhack.backend.api.models;
+package team.marela.dragonhack.backend.api.models.users;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
     String username;

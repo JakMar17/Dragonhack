@@ -1,4 +1,4 @@
-package team.marela.dragonhack.backend.api.models;
+package team.marela.dragonhack.backend.api.models.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

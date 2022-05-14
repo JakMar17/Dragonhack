@@ -21,6 +21,9 @@ public class CardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cardId;
 
+    @Column(nullable = false, unique = true, length = 32)
+    private String cardNumber;
+
     @ManyToOne
     @JoinColumn(name = "card_template_id")
     private CardTemplateEntity cardTemplate;

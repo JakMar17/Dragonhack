@@ -5,6 +5,7 @@ import team.marela.dragonhack.backend.database.entities.organization.WorkerEntit
 import team.marela.dragonhack.backend.database.entities.users.UserEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity(name = "transaction_order")
 @Table
@@ -18,6 +19,9 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
+
+    @Column(nullable = false)
+    private BigDecimal amount;
 
     @OneToOne
     @JoinColumn(name = "transaction_id")
