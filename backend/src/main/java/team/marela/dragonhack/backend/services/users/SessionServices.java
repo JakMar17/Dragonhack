@@ -2,6 +2,7 @@ package team.marela.dragonhack.backend.services.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import team.marela.dragonhack.backend.database.entities.organization.WorkerEntity;
 import team.marela.dragonhack.backend.database.entities.users.SessionEntity;
 import team.marela.dragonhack.backend.database.entities.users.UserEntity;
 import team.marela.dragonhack.backend.database.repositories.users.SessionRepository;
@@ -38,6 +39,21 @@ public class SessionServices {
                         .build()
         );
 
+        return sessionId;
+    }
+
+    public String generateWorkerSessionId(WorkerEntity user) {
+        var sessionId = validSessionId(
+                sessionRepository.findAll().stream()
+                        .map(SessionEntity::getSessionId)
+                        .toList()
+        );
+//        var session = sessionRepository.save(
+//                SessionEntity.builder()
+//                        .sessionId(sessionId)
+//                        .user(user)
+//                        .build()
+//        );
         return sessionId;
     }
 

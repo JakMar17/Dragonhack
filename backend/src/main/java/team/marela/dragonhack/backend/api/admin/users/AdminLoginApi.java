@@ -7,6 +7,7 @@ import team.marela.dragonhack.backend.api.models.users.LoginDto;
 import team.marela.dragonhack.backend.api.models.users.UserDto;
 import team.marela.dragonhack.backend.exceptions.CredentialsInvalidException;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
+import team.marela.dragonhack.backend.services.admin.workers.WorkerServices;
 import team.marela.dragonhack.backend.services.users.LoginRegisterServices;
 import team.marela.dragonhack.backend.services.users.SessionServices;
 
@@ -19,19 +20,19 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 public class AdminLoginApi {
 
-    private final LoginRegisterServices loginRegisterServices;
+    private final WorkerServices workerServices;
     private final SessionServices sessionServices;
 
     @PostMapping
     public UserDto loginUser (@Valid @RequestBody LoginDto login) throws DataNotFoundException, CredentialsInvalidException {
         log.info("login");
-        var user = loginRegisterServices.loginUser(login.getUsername(), login.getPassword());
+        var user = workerServices.loginUser(login.getUsername(), login.getPassword());
         return new UserDto(
                 user.getUsername(),
                 user.getFirstname(),
                 user.getLastname(),
                 user.getEmail(),
-                sessionServices.generateSessionId(user)
+                sessionServices.generateWorkerSessionId(user)
         );
     }
 }

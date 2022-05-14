@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface WorkerRepository extends JpaRepository<WorkerEntity, Integer> {
     Optional<WorkerEntity> findByUsernameAndOrganization(String username, OrganizationEntity organization);
+    Optional<WorkerEntity> findByUsername(String username);
 }

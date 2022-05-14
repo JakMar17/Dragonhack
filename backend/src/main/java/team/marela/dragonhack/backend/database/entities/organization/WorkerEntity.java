@@ -11,8 +11,8 @@ import java.util.Set;
 @Table(
         name = "worker",
         uniqueConstraints = @UniqueConstraint(columnNames = {
-                "username",
-                "organization_id"
+                "username"
+//                "organization_id"
         })
 )
 @Getter

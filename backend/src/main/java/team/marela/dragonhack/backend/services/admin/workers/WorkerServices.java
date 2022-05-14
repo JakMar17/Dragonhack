@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.users.RegisterDto;
+import team.marela.dragonhack.backend.database.entities.organization.WorkerEntity;
 import team.marela.dragonhack.backend.database.entities.users.UserEntity;
+import team.marela.dragonhack.backend.database.repositories.organization.WorkerRepository;
 import team.marela.dragonhack.backend.database.repositories.users.UserRepository;
 import team.marela.dragonhack.backend.exceptions.CredentialsInvalidException;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
@@ -13,11 +15,11 @@ import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
 @RequiredArgsConstructor
 public class WorkerServices {
 
-    private final UserRepository userRepository;
+    private final WorkerRepository workerRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserEntity loginUser(String username, String password) throws DataNotFoundException, CredentialsInvalidException {
-        var user = userRepository.findByUsername(username)
+    public WorkerEntity loginUser(String username, String password) throws DataNotFoundException, CredentialsInvalidException {
+        var user = workerRepository.findByUsername(username)
                 .orElseThrow(() -> new DataNotFoundException("User with given username does not exists"));
 
         if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
