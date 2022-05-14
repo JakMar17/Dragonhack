@@ -3,11 +3,10 @@ package team.marela.dragonhack.backend.services.transactions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.cards.CardDto;
-import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
+import team.marela.dragonhack.backend.api.models.cards.TransactionsDto;
 import team.marela.dragonhack.backend.database.entities.transactions.FillUpEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.OrderEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.TransactionEntity;
-import team.marela.dragonhack.backend.database.repositories.cards.CardRepository;
 import team.marela.dragonhack.backend.database.repositories.organization.OrganizationRepository;
 import team.marela.dragonhack.backend.database.repositories.organization.WorkerRepository;
 import team.marela.dragonhack.backend.database.repositories.transactions.FillUpRepository;
@@ -17,6 +16,8 @@ import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
 import team.marela.dragonhack.backend.services.cards.CardServices;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -79,10 +80,38 @@ public class TransactionServices {
         return order;
     }
 
-//    public CardDto getCardInfo(String cardNumber) throws DataNotFoundException {
-//        var card = cardServices.getCard(cardNumber);
-//
-//        var transactionsDtos =
-//
-//    }
+    public CardDto getCardInfo(String cardNumber) throws DataNotFoundException {
+        var card = cardServices.getCard(cardNumber);
+
+        var transactions = transactionRepository.findByCard(card);
+        var orders = transactions.stream()
+                .filter(e -> e.getOrder() != null)
+                .map(e -> TransactionsDto.builder()
+                        .amount(e.getOrder().getAmount().multiply(BigDecimal.valueOf(-1.0)))
+                        .created(e.getCreated())
+                        .build()
+                )
+                .toList();
+
+        var fillUps = transactions.stream()
+                .filter(e -> e.getFillUp() != null)
+                .map(e -> TransactionsDto.builder()
+                        .amount(e.getFillUp().getAmount())
+                        .created(e.getCreated())
+                        .build()
+                ).toList();
+
+
+        var transactionDtos = Stream.concat(
+                orders.stream(),
+                fillUps.stream()
+        )
+                .sorted(Comparator.comparing(TransactionsDto::getCreated))
+                .toList();
+
+        return CardDto.builder()
+                .transactions(transactionDtos)
+                .cardNumber(cardNumber)
+                .build();
+    }
 }

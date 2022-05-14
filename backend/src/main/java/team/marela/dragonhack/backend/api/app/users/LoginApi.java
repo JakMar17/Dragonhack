@@ -2,10 +2,7 @@ package team.marela.dragonhack.backend.api.app.users;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.marela.dragonhack.backend.api.models.users.LoginDto;
 import team.marela.dragonhack.backend.api.models.users.UserDto;
 import team.marela.dragonhack.backend.exceptions.CredentialsInvalidException;
@@ -19,6 +16,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class LoginApi {
 
     private final LoginRegisterServices loginRegisterServices;
