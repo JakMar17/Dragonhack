@@ -3,7 +3,6 @@ package team.marela.dragonhack.backend.database.entities.events;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "event_day")

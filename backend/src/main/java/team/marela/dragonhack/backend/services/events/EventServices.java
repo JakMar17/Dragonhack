@@ -1,7 +1,6 @@
 package team.marela.dragonhack.backend.services.events;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.events.EventCreateDto;
 import team.marela.dragonhack.backend.api.models.events.EventDto;
@@ -14,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

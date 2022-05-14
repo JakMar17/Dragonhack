@@ -1,4 +1,4 @@
-package team.marela.dragonhack.backend.services.transactions;
+package team.marela.dragonhack.backend.services.cards.transactions;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

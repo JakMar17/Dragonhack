@@ -1,6 +1,5 @@
 package team.marela.dragonhack.backend.database.entities.events.price_menu;
 
-import lombok.Getter;
 import lombok.*;
 import team.marela.dragonhack.backend.database.entities.events.EventEntity;
 

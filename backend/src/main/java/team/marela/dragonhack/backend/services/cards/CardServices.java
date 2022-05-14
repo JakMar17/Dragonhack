@@ -2,7 +2,6 @@ package team.marela.dragonhack.backend.services.cards;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import team.marela.dragonhack.backend.api.models.cards.CardDto;
 import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
 import team.marela.dragonhack.backend.database.entities.events.EventEntity;
 import team.marela.dragonhack.backend.database.entities.users.UserEntity;
@@ -62,5 +61,11 @@ public class CardServices {
         var cardTemplate = card.getCardTemplate();
         return eventRepository.findByCardTemplate(cardTemplate)
                 .orElseThrow(() -> new DataNotFoundException("Event not found"));
+    }
+
+    public List<CardEntity> getAllUsersCards(String username) throws DataNotFoundException {
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new DataNotFoundException("User does not exists"));
+        return cardRepository.findAllByUser(user);
     }
 }

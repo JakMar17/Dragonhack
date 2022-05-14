@@ -8,7 +8,6 @@ import team.marela.dragonhack.backend.api.models.users.UserDto;
 import team.marela.dragonhack.backend.exceptions.CredentialsInvalidException;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
 import team.marela.dragonhack.backend.services.admin.workers.WorkerServices;
-import team.marela.dragonhack.backend.services.users.LoginRegisterServices;
 import team.marela.dragonhack.backend.services.users.SessionServices;
 
 import javax.validation.Valid;
