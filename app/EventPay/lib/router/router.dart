@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../screens/root.dart';
+import '../screens/tabs/dogodki.dart';
+import '../screens/tabs/kartice.dart';
 import '../screens/registration.dart';
 import '../screens/sign_in.dart';
 import '../screens/splash.dart';
+import '../screens/tabs/profil.dart';
 import '../util/logger.dart';
 import 'routes.dart';
 
@@ -35,6 +39,34 @@ abstract class EPRouter {
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               FadeTransition(opacity: animation, child: child),
           transitionDuration: const Duration(milliseconds: 850),
+        );
+      case EPRoute.root:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => const RootScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+        );
+
+      case EPRoute.kartice:
+        return PageRouteBuilder(
+          fullscreenDialog: true,
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionDuration: const Duration(milliseconds: 0),
+          pageBuilder: (context, _, __) => const KarticeTab(),
+        );
+      case EPRoute.dogodki:
+        return PageRouteBuilder(
+          fullscreenDialog: true,
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionDuration: const Duration(milliseconds: 0),
+          pageBuilder: (context, _, __) => const DogodkiTab(),
+        );
+      case EPRoute.profil:
+        return PageRouteBuilder(
+          fullscreenDialog: true,
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionDuration: const Duration(milliseconds: 0),
+          pageBuilder: (context, _, __) => const ProfilTab(),
         );
     }
 

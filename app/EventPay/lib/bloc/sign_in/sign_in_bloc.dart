@@ -27,11 +27,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         _authService = authService,
         super(const SignInState.initial()) {
     on<SubmitSignIn>(onSubmitSignIn);
-    on<EmailChanged>(onEmailChanged);
+    on<UsernameChanged>(onUsernameChanged);
     on<PasswordChanged>(onPasswordChanged);
   }
 
-  void emailChanged(String value) => add(EmailChanged(value));
+  void usernameChanged(String value) => add(UsernameChanged(value));
   void passwordChanged(String value) => add(PasswordChanged(value));
   void signIn() => add(SubmitSignIn());
 
@@ -39,7 +39,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     SubmitSignIn event,
     Emitter<SignInState> emit,
   ) async {
-    if (!EPValidator.isValidEmail(state.email)) {
+    if (!EPValidator.isValidText(state.username)) {
       emit(state.copyWith(failure: const EmailValidationFailure()));
       return;
     }
@@ -51,7 +51,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(state.copyWith(isLoading: true));
 
     final Either<BackendFailure, EventPayUser> userOrFailure =
-        await _authService.login(state.email, state.password);
+        await _authService.login(state.username, state.password);
 
     if (userOrFailure.isError()) {
       emit(state.copyWith(
@@ -65,16 +65,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     _globalBloc.updateUser(userOrFailure.value);
     final LocalStorage storage = LocalStorage('user');
     storage.setItem('user', userOrFailure);
-    print(storage.getItem('user'));
+    print("storage.getItem('user'): ${storage.getItem('user')}");
 
     emit(state.copyWith(isLoading: false, signInSuccessful: true));
   }
 
-  FutureOr<void> onEmailChanged(
-    EmailChanged event,
+  FutureOr<void> onUsernameChanged(
+    UsernameChanged event,
     Emitter<SignInState> emit,
   ) async {
-    emit(state.copyWith(email: event.value));
+    emit(state.copyWith(username: event.value));
   }
 
   FutureOr<void> onPasswordChanged(

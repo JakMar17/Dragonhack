@@ -17,10 +17,10 @@ import 'loading_indicator.dart';
 import 'registration.dart';
 
 class SignInScreenArgs {
-  final String email;
+  final String username;
   final String password;
 
-  const SignInScreenArgs({required this.email, required this.password});
+  const SignInScreenArgs({required this.username, required this.password});
 }
 
 class SignInScreen extends StatelessWidget {
@@ -48,12 +48,12 @@ class _SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SignInBloc bloc = BlocProvider.of<SignInBloc>(context);
-    final TextEditingController emailController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
-    if (args.email.isNotEmpty) {
-      emailController.text = args.email;
-      bloc.emailChanged(args.email);
+    if (args.username.isNotEmpty) {
+      usernameController.text = args.username;
+      bloc.usernameChanged(args.username);
     }
     if (args.password.isNotEmpty) {
       passwordController.text = args.password;
@@ -100,20 +100,22 @@ class _SignInScreen extends StatelessWidget {
                     Hero(
                       tag: 'logo',
                       child: SvgPicture.asset(
-                        VecImage.logo,
-                        color: VecColor.primaryColor(context),
+                        EPImage.logo,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
                     const SizedBox(
-                      height: 207,
+                      height: 70,
                     ),
                     Hero(
-                      tag: 'email',
+                      tag: 'username',
                       child: VecTextField(
-                        placeholder: 'Email',
-                        onChanged: bloc.emailChanged,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
+                        placeholder: 'Username',
+                        onChanged: bloc.usernameChanged,
+                        keyboardType: TextInputType.text,
+                        controller: usernameController,
                         textInputAction: TextInputAction.next,
                       ),
                     ),
@@ -138,7 +140,7 @@ class _SignInScreen extends StatelessWidget {
                         errorMessage,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            color: VecColor.primaryContrastingColor),
+                            color: EPColor.primaryContrastingColor),
                       ),
                     ],
                   ],
@@ -150,7 +152,7 @@ class _SignInScreen extends StatelessWidget {
                       width: double.infinity,
                       child: VecTextShadowButton.filled(
                         text: "Login",
-                        color: VecColor.backgroud,
+                        color: EPColor.backgroud,
                         onPressed: bloc.state.isLoading ? null : bloc.signIn,
                         textStyle: VecStyles.buttonTextStyle(context),
                         child: bloc.state.isLoading
@@ -165,7 +167,7 @@ class _SignInScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: VecTextShadowButton.filled(
-                        color: VecColor.backgroud,
+                        color: EPColor.backgroud,
                         text: "Create new user",
                         textStyle: VecStyles.buttonTextStyle(context),
                         onPressed: () {
@@ -173,7 +175,7 @@ class _SignInScreen extends StatelessWidget {
                             context,
                             EPRoute.registration,
                             arguments: RegistrationScreenArgs(
-                              email: state.email,
+                              username: state.username,
                               password: state.password,
                             ),
                           );

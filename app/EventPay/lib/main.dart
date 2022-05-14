@@ -44,14 +44,9 @@ class EventPayApp extends StatelessWidget {
     return MaterialApp(
       title: 'EventPay',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         primaryColor: Colors.lightBlue[800],
         fontFamily: 'Roboto',
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 30.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 18.0, fontFamily: 'Hind'),
-        ),
       ),
       initialRoute: EPRoute.initial,
       onGenerateRoute: EPRouter.onGenerateRoute,

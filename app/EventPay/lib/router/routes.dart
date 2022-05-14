@@ -4,5 +4,8 @@ abstract class EPRoute {
   static const String signIn = '/signIn';
   static const String registration = '/register';
   static const String root = '/root';
-  static const String home = '/home';
+  static const String kartice = '/kartice';
+  static const String dogodki = '/dogodki';
+  static const String profil = '/profil';
+  static const List<String> tabNames = [kartice, dogodki, profil];
 }
