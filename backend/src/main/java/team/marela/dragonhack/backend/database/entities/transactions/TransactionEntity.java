@@ -4,6 +4,7 @@ import lombok.*;
 import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "transaction")
 @Table
@@ -17,6 +18,10 @@ public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionId;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private LocalDateTime created = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "card_id")

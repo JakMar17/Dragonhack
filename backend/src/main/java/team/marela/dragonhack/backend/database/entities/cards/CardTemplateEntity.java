@@ -19,7 +19,10 @@ public class CardTemplateEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cardTemplateId;
 
-    @ManyToOne
+    @Lob
+    private String image;
+
+    @OneToOne
     @JoinColumn(name = "event_id")
     private EventEntity event;
 

@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.marela.dragonhack.backend.api.models.RegisterDto;
-import team.marela.dragonhack.backend.api.models.UserDto;
-import team.marela.dragonhack.backend.database.entities.users.UserEntity;
+import team.marela.dragonhack.backend.api.models.users.RegisterDto;
+import team.marela.dragonhack.backend.api.models.users.UserDto;
 import team.marela.dragonhack.backend.services.users.LoginRegisterServices;
 import team.marela.dragonhack.backend.services.users.SessionServices;
 
