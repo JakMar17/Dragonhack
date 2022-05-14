@@ -2,10 +2,7 @@ package team.marela.dragonhack.backend.api.admin.events;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.marela.dragonhack.backend.api.models.events.EventCreateDto;
 
 import javax.validation.Valid;
@@ -14,6 +11,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/admin/events")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AdminEventsApi {
 
     @PostMapping

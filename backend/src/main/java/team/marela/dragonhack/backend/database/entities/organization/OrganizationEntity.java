@@ -19,6 +19,9 @@ public class OrganizationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer organizationId;
 
+    @Column(nullable = false, unique = true)
+    private String organizationName;
+
     @OneToMany(mappedBy = "organization")
     private Set<WorkerEntity> employees;
 
