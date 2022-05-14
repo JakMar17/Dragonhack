@@ -145,8 +145,8 @@ class _RegisterScreen extends StatelessWidget {
                     VecTextField(
                       placeholder: 'Firstname',
                       onChanged: bloc.firstnameChanged,
+                      keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
-                      obscureText: true,
                     ),
                     const SizedBox(
                       height: 12,
@@ -164,7 +164,7 @@ class _RegisterScreen extends StatelessWidget {
                     VecTextField(
                       placeholder: 'Username',
                       onChanged: bloc.usernameChanged,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.name,
                       obscureText: false,
                       textInputAction: TextInputAction.done,
                     ),

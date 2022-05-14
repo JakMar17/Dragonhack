@@ -68,10 +68,9 @@ class AuthService {
 
   Future<Either<BackendFailure, EventPayUser>> register(String firstname,
       String lastname, String email, String username, String password) async {
+    print("$firstname, $lastname, $email, $username, $password");
     final http.Response? response = await _http.post(
       [
-        EPServerRoute.api,
-        EPServerRoute.apiAuth,
         EPServerRoute.apiAuthRegister,
       ],
       headers: <String, String>{
@@ -89,6 +88,7 @@ class AuthService {
     );
 
     if (response == null) return error(const UnknownBackendFailure());
+    print(response.statusCode);
 
     switch (response.statusCode) {
       case HttpStatus.created:
