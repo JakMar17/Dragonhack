@@ -1,6 +1,7 @@
 package team.marela.dragonhack.backend.api.app.users;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import team.marela.dragonhack.backend.services.users.SessionServices;
 
 import javax.validation.Valid;
 
+@Log
 @RestController
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class RegisterApi {
 
     @PostMapping
     public UserDto registerNewUser(@RequestBody @Valid RegisterDto user) {
+        log.info("Register");
         var entity = loginRegisterServices.registerNewUser(user);
         var dto = modelMapper.map(entity, UserDto.class);
         dto.setSessionId(sessionServices.generateSessionId(entity));
