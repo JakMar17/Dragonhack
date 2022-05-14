@@ -23,6 +23,15 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer eventId;
 
+    @Column(nullable = false, unique = true)
+    private String eventName;
+
+    @Column(nullable = false)
+    private String location;
+
+    @Column(nullable = false)
+    private String trr;
+
     @OneToMany(mappedBy = "event")
     private Set<EventDayEntity> eventDays;
 
