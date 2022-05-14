@@ -18,12 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CardServices {
 
-    private static final int CARD_NUMBER_LENGTH = 64;
+    private static final int CARD_NUMBER_LENGTH = 32;
 
     private final CardRepository cardRepository;
     private final EventRepository eventRepository;
     private final CardTemplateRepository cardTemplateRepository;
     private final UserRepository userRepository;
+
+    public CardEntity generateNewCard(Integer eventId, String username) throws DataNotFoundException {
+        var event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new DataNotFoundException("Event not found"));
+
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+
+        return generateNewCard(event, user);
+    }
 
     public CardEntity generateNewCard(EventEntity event, UserEntity user) throws DataNotFoundException {
         var cardTemplate = cardTemplateRepository.findByEvent(event)
@@ -59,7 +69,7 @@ public class CardServices {
 
     public EventEntity findCardsEvent(CardEntity card) throws DataNotFoundException {
         var cardTemplate = card.getCardTemplate();
-        return eventRepository.findByCardTemplate(cardTemplate)
+        return eventRepository.findById(cardTemplate.getEvent().getEventId())
                 .orElseThrow(() -> new DataNotFoundException("Event not found"));
     }
 

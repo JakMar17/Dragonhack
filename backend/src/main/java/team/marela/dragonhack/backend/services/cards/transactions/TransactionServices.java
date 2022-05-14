@@ -110,6 +110,12 @@ public class TransactionServices {
                 .toList();
 
         return CardDto.builder()
+                .image(card.getCardTemplate().getImage())
+                .amount(
+                        transactionDtos.stream()
+                                .map(TransactionsDto::getAmount)
+                                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                )
                 .transactions(transactionDtos)
                 .cardNumber(cardNumber)
                 .build();

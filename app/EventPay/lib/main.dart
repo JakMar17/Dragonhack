@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eventpay/screens/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -43,6 +44,7 @@ class EventPayApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'EventPay',
+      home: EventScreen(),
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.lightBlue[800],
@@ -53,9 +55,9 @@ class EventPayApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 18.0, fontFamily: 'Hind'),
         ),
       ),
-      initialRoute: EPRoute.initial,
-      onGenerateRoute: EPRouter.onGenerateRoute,
-      navigatorKey: navigatorKey,
+      // initialRoute: EPRoute.initial,
+      // onGenerateRoute: EPRouter.onGenerateRoute,
+      // navigatorKey: navigatorKey,
     );
   }
 }

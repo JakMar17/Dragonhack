@@ -60,4 +60,9 @@ abstract class VecColor {
   }
 
   static const Color yellow = Color(0xFFF3BE00);
+
+
+  static const Color almostBlack = Color(0xFF0C1017);
+  static const Color orange = Color(0xFFF75423);
+  // static const /*  */
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import team.marela.dragonhack.backend.exceptions.CredentialsInvalidException;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
+import team.marela.dragonhack.backend.exceptions.NegativeBalanceException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -32,8 +33,8 @@ public class ExceptionCatcher {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {ConstraintViolationException.class})
-    public ExceptionWrapper handleConstraintViolationException (ConstraintViolationException exception) {
+    @ExceptionHandler(value = {ConstraintViolationException.class, NegativeBalanceException.class})
+    public ExceptionWrapper handleConstraintViolationException (Exception exception) {
         log.warning(exception.getMessage());
         return new ExceptionWrapper(List.of(exception.getMessage()));
     }

@@ -4,10 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.events.EventCreateDto;
 import team.marela.dragonhack.backend.api.models.events.EventDto;
+import team.marela.dragonhack.backend.database.entities.cards.CardTemplateEntity;
 import team.marela.dragonhack.backend.database.entities.events.EventDayEntity;
 import team.marela.dragonhack.backend.database.entities.events.EventEntity;
+import team.marela.dragonhack.backend.database.repositories.cards.CardTemplateRepository;
 import team.marela.dragonhack.backend.database.repositories.events.EventDayRepository;
 import team.marela.dragonhack.backend.database.repositories.events.EventRepository;
+import team.marela.dragonhack.backend.database.repositories.organization.OrganizationRepository;
+import team.marela.dragonhack.backend.database.repositories.organization.WorkerRepository;
+import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -18,15 +23,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventServices {
 
+    private final WorkerRepository workerRepository;
+
     private final EventRepository eventRepository;
     private final EventDayRepository eventDayRepository;
+    private final CardTemplateRepository cardTemplateRepository;
 
-    public EventEntity createEvent(EventCreateDto dto) {
+    public EventEntity createEvent(EventCreateDto dto) throws DataNotFoundException {
+        var worker = workerRepository.findByUsername(dto.getWorkerUsername())
+                .orElseThrow(() -> new DataNotFoundException("Worker was not found"));
+
         var event = EventEntity.builder()
                 .eventName(dto.getEventName())
                 .location(dto.getLocation())
                 .trr(dto.getTrr())
                 .image(dto.getImage())
+                .organization(worker.getOrganization())
                 .build();
 
         var savedEvent = eventRepository.save(event);
@@ -44,6 +56,15 @@ public class EventServices {
                 ))
         );
 
+        var cardTemplate = cardTemplateRepository.save(
+                CardTemplateEntity.builder()
+                        .image(dto.getImage())
+                        .event(savedEvent)
+                        .build()
+        );
+
+        event.setCardTemplate(cardTemplate);
+
         return event;
     }
 
@@ -51,6 +72,7 @@ public class EventServices {
         return eventRepository.findAll().stream()
                 .map(e ->
                         EventDto.builder()
+                                .eventId(e.getEventId())
                                 .eventName(e.getEventName())
                                 .image(e.getImage())
                                 .location(e.getLocation())
