@@ -47,7 +47,7 @@ class _LoadingIndicator extends StatelessWidget {
                 offset: Offset(radius * cos(pi / 4), radius * sin(pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[0]),
+                  color: EPColor.resolveColor(context, colors[0]),
                 ),
               ),
               Transform.translate(
@@ -55,7 +55,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(2 * pi / 4), radius * sin(2 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[1]),
+                  color: EPColor.resolveColor(context, colors[1]),
                 ),
               ),
               Transform.translate(
@@ -63,7 +63,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(3 * pi / 4), radius * sin(3 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[2]),
+                  color: EPColor.resolveColor(context, colors[2]),
                 ),
               ),
               Transform.translate(
@@ -71,7 +71,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(4 * pi / 4), radius * sin(4 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[3]),
+                  color: EPColor.resolveColor(context, colors[3]),
                 ),
               ),
               Transform.translate(
@@ -79,7 +79,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(5 * pi / 4), radius * sin(5 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[4]),
+                  color: EPColor.resolveColor(context, colors[4]),
                 ),
               ),
               Transform.translate(
@@ -87,7 +87,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(6 * pi / 4), radius * sin(6 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[5]),
+                  color: EPColor.resolveColor(context, colors[5]),
                 ),
               ),
               Transform.translate(
@@ -95,7 +95,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(7 * pi / 4), radius * sin(7 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[6]),
+                  color: EPColor.resolveColor(context, colors[6]),
                 ),
               ),
               Transform.translate(
@@ -103,7 +103,7 @@ class _LoadingIndicator extends StatelessWidget {
                     Offset(radius * cos(8 * pi / 4), radius * sin(8 * pi / 4)),
                 child: Dot(
                   radius: dotRadius,
-                  color: VecColor.resolveColor(context, colors[7]),
+                  color: EPColor.resolveColor(context, colors[7]),
                 ),
               ),
             ],

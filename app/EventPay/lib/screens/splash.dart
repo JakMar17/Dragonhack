@@ -36,30 +36,11 @@ class _SplashScreen extends StatelessWidget {
           context,
           state.pushRoute!,
           arguments: const SignInScreenArgs(
-            email: '',
+            username: '',
             password: '',
           ),
         );
         return;
-      } else if (!state.connection) {
-        showCupertinoDialog(
-          context: context,
-          builder: (builder) {
-            return CupertinoAlertDialog(
-              title: const Text("No internet connection"),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  child: const Text("Retry"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    BlocProvider.of<SplashScreenBloc>(context).retry();
-                  },
-                )
-              ],
-            );
-          },
-        );
       }
     }, builder: (context, state) {
       return CupertinoPageScaffold(
@@ -67,8 +48,7 @@ class _SplashScreen extends StatelessWidget {
           child: Hero(
             tag: 'logo',
             child: SvgPicture.asset(
-              VecImage.logo,
-              color: VecColor.primaryColor(context),
+              EPImage.logo,
             ),
           ),
         ),

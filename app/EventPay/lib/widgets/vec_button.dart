@@ -57,7 +57,7 @@ class VecTextShadowButton extends VecButton {
           child: child ??
               Text(
                 text,
-                style: textStyle ?? const TextStyle(color: VecColor.primary),
+                style: textStyle ?? const TextStyle(color: EPColor.primary),
               ),
           onPressed: onPressed,
           color: color,

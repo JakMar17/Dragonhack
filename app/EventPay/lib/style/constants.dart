@@ -22,7 +22,7 @@ const BoxShadow cardBoxShadow = BoxShadow(
 );
 
 const TextStyle buttonTextStyle = TextStyle(
-  color: VecColor.primary,
+  color: EPColor.primary,
   fontSize: 18,
   fontWeight: FontWeight.w600,
 );

@@ -2,7 +2,7 @@ part of 'sign_in_bloc.dart';
 
 @immutable
 class SignInState {
-  final String email;
+  final String username;
   final String password;
 
   final bool isLoading;
@@ -10,21 +10,21 @@ class SignInState {
   final Failure? failure;
 
   const SignInState(
-      {required this.email,
+      {required this.username,
       required this.password,
       required this.isLoading,
       required this.signInSuccessful,
       required this.failure});
 
   const SignInState.initial()
-      : email = '',
+      : username = '',
         password = '',
         isLoading = false,
         signInSuccessful = null,
         failure = null;
 
   SignInState copyWith({
-    String? email,
+    String? username,
     String? password,
     bool? isLoading,
     bool? signInSuccessful,
@@ -32,7 +32,7 @@ class SignInState {
     Failure? failure,
   }) {
     return SignInState(
-      email: email ?? this.email,
+      username: username ?? this.username,
       password: password ?? this.password,
       isLoading: isLoading ?? this.isLoading,
       signInSuccessful: signInSuccessful,
