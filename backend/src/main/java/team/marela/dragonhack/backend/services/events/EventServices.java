@@ -69,7 +69,18 @@ public class EventServices {
     }
 
     public List<EventDto> getAllEvents() {
-        return eventRepository.findAll().stream()
+        return mapEntitiesToDto(eventRepository.findAll());
+    }
+
+    public List<EventDto> getOrganizationEvents(String workerUsername) throws DataNotFoundException {
+        var worker = workerRepository.findByUsername(workerUsername)
+                .orElseThrow(() -> new DataNotFoundException("Worker not found"));
+        var organization = worker.getOrganization();
+        return mapEntitiesToDto(eventRepository.findAllByOrganization(organization));
+    }
+
+    private List<EventDto> mapEntitiesToDto(List<EventEntity> entities) {
+        return entities.stream()
                 .map(e ->
                         EventDto.builder()
                                 .eventId(e.getEventId())
@@ -93,6 +104,5 @@ public class EventServices {
                 .filter(e -> LocalDateTime.now().isAfter(e.getEndDate()))
                 .sorted(Comparator.comparing(EventDto::getStartDate))
                 .toList();
-
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import team.marela.dragonhack.backend.api.models.cards.CardDto;
 import team.marela.dragonhack.backend.api.models.transactions.TransactionPostModel;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
+import team.marela.dragonhack.backend.exceptions.NegativeBalanceException;
 import team.marela.dragonhack.backend.services.cards.transactions.TransactionServices;
 
 import javax.validation.Valid;
@@ -27,7 +28,7 @@ public class TransactionApi {
 
 
     @PostMapping("/order")
-    public boolean order(@RequestBody @Valid TransactionPostModel dto) throws DataNotFoundException {
+    public boolean order(@RequestBody @Valid TransactionPostModel dto) throws DataNotFoundException, NegativeBalanceException {
         transactionServices.createOrderOnCard(dto.getCardNumber(), dto.getAmount(), dto.getWorkerUsername());
         return true;
     }

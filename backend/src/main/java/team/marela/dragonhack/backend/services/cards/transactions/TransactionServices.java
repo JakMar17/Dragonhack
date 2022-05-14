@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.cards.CardDto;
 import team.marela.dragonhack.backend.api.models.cards.TransactionsDto;
+import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.FillUpEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.OrderEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.TransactionEntity;
@@ -13,10 +14,12 @@ import team.marela.dragonhack.backend.database.repositories.transactions.FillUpR
 import team.marela.dragonhack.backend.database.repositories.transactions.OrderRepository;
 import team.marela.dragonhack.backend.database.repositories.transactions.TransactionRepository;
 import team.marela.dragonhack.backend.exceptions.DataNotFoundException;
+import team.marela.dragonhack.backend.exceptions.NegativeBalanceException;
 import team.marela.dragonhack.backend.services.cards.CardServices;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -52,8 +55,13 @@ public class TransactionServices {
         return fillUpRepository.save(fillUp);
     }
 
-    public OrderEntity createOrderOnCard(String cardNumber, BigDecimal amount, String workerUsername) throws DataNotFoundException {
+    public OrderEntity createOrderOnCard(String cardNumber, BigDecimal amount, String workerUsername) throws DataNotFoundException, NegativeBalanceException {
         var card = cardServices.getCard(cardNumber);
+
+        if(getCardBalance(card).subtract(amount).compareTo(BigDecimal.ZERO) <= 0) {
+            throw new NegativeBalanceException("Balance is too low");
+        }
+
         var user = card.getUser();
         var event = cardServices.findCardsEvent(card);
 
@@ -119,5 +127,21 @@ public class TransactionServices {
                 .transactions(transactionDtos)
                 .cardNumber(cardNumber)
                 .build();
+    }
+
+    private BigDecimal getCardBalance(CardEntity card) {
+        var in = card.getTransactions().stream()
+                .map(TransactionEntity::getFillUp)
+                .filter(Objects::nonNull)
+                .map(FillUpEntity::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        var out = card.getTransactions().stream()
+                .map(TransactionEntity::getOrder)
+                .filter(Objects::nonNull)
+                .map(OrderEntity::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return in.subtract(out);
     }
 }
