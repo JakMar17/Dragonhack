@@ -25,6 +25,9 @@ public class EventDayEntity {
     @Column(nullable = false)
     private LocalDateTime eventEnd;
 
+    @Lob
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "event_id")
     private EventEntity event;
