@@ -18,7 +18,8 @@ class KarticeBloc extends Bloc<_KarticeEvent, KarticeState> {
       : _globalBloc = globalBloc,
         super(const KarticeState.initial()) {
     on<_Initialize>(_onInitialize);
-    on<_Reset>(_onReset);
+    on<Reset>(_onReset);
+    on<Update>(_onUpdate);
 
     add(_Initialize());
   }
@@ -41,16 +42,28 @@ class KarticeBloc extends Bloc<_KarticeEvent, KarticeState> {
   }
 
   FutureOr<void> _onReset(
-    _Reset event,
+    Reset event,
     Emitter<KarticeState> emit,
   ) async {
     emit(const KarticeState.initial());
     add(_Initialize());
   }
 
+  FutureOr<void> _onUpdate(
+    Update event,
+    Emitter<KarticeState> emit,
+  ) async {
+    BackendService _backendService = BackendService.instance;
+    Either<BackendFailure, List<EventPayCard>> cardsOrFailure =
+        await _backendService.getCards();
+    print("cardsOrFailure: $cardsOrFailure");
+    if (cardsOrFailure.isError()) return null;
+    emit(state.copyWith(initialized: true, cards: cardsOrFailure.value));
+  }
+
   // Public API
 
   Future<void> refresh() async => add(_Initialize());
 
-  void reset() async => add(_Reset());
+  void reset() async => add(Reset());
 }

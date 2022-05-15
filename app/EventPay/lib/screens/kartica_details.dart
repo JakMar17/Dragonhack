@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:intl/intl.dart';
 
 import 'package:eventpay/widgets/vec_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../bloc/global/global_bloc.dart';
 import '../bloc/kartice/kartice_bloc.dart';
@@ -37,6 +40,7 @@ class _KarticaDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = DateFormat('dd. MM. yyyy');
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
 
@@ -63,7 +67,10 @@ class _KarticaDetailsScreen extends StatelessWidget {
                 return Container(
                     color: EPColor.resolveColor(context, EPColor.backgroud));
               }
-              if (state.selectedCard != null) {
+              if (state.cards != null) {
+                // Timer.periodic(Duration(seconds: 1), (timer) {
+                //   context.read<KarticeBloc>().add(Update(state));
+                // });
                 final card = state.cards![0];
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -106,7 +113,7 @@ class _KarticaDetailsScreen extends StatelessWidget {
                                         BorderRadius.all(Radius.circular(24.0)),
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                          card.image,
+                                        card.image,
                                       ),
                                       fit: BoxFit.fill,
                                     ),
@@ -118,16 +125,17 @@ class _KarticaDetailsScreen extends StatelessWidget {
                                   // margin: const EdgeInsets.symmetric(horizontal: 20),
                                   margin: EdgeInsets.only(top: h * 0.15),
                                   decoration: const BoxDecoration(
+                                    color: Colors.white,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://i.stack.imgur.com/YLy3V.png'),
-                                      fit: BoxFit.fill,
-                                    ),
                                   ),
                                   width: h * 0.2,
                                   height: h * 0.2,
+                                  child: QrImage(
+                                    data: card.cardNumber,
+                                    version: QrVersions.auto,
+                                    size: 200.0,
+                                  ),
                                 ),
                               ],
                             ),
@@ -135,13 +143,16 @@ class _KarticaDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       SliverToBoxAdapter(
-                        child: Center(
-                          child: Text(
-                            "${card.amount}€",
-                            style: TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.w300,
-                              color: EPColor.highlightColor,
+                        child: GestureDetector(
+                          onTap: () => context.read<KarticeBloc>().add(Update(state)),
+                          child: Center(
+                            child: Text(
+                              "${card.amount} €",
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.w300,
+                                color: EPColor.highlightColor,
+                              ),
                             ),
                           ),
                         ),
@@ -169,8 +180,8 @@ class _KarticaDetailsScreen extends StatelessWidget {
                       ),
                       SliverToBoxAdapter(child: const SizedBox(height: 5)),
                       SliverToBoxAdapter(
-                        child: const Text(
-                          "3. 5. 2022 - 24. 5. 2022",
+                        child: Text(
+                          "${formatter.format(DateTime.parse(card.startTime))} - ${formatter.format(DateTime.parse(card.endTime))}",
                           style: TextStyle(
                             fontSize: 20,
                             color: EPColor.highlightColor,
