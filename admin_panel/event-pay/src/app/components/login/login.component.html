@@ -1,10 +1,11 @@
 <!--Login Form-->
-<div class="container form-container" id="signing-form-container">
+<div class="container form-container col-10 col-sm-4 d-flex flex-column justify-content-center" id="signing-form-container">
     <div class="row">
-      <div class="col-md-6 mx-auto">
+      <h1 id="title" class="text-uppercase text-center mt-3">EventPay</h1>
+      <div class="mx-auto">
         <div class="formSign form" data-aos="zoom-in">
-          <div class="logo mb-3">
-            <div class="col-md-12 text-center">
+          <div class="logo mt-2">
+            <div class="text-center" id="login_title">
               <h1>Login</h1>
             </div>
           </div>
@@ -19,15 +20,15 @@
               <input type="password" name="geslo" id="geslo" class="form-control" [(ngModel)]="password" (keyup.enter)="login()">
             </div>
 
-            <div *ngIf="isWrongUsernameOrPassword" class="alert alert-danger" role="alert">
+            <div *ngIf="isWrongUsernameOrPassword" class="alert alert-light" role="alert">
               Wrong username or password
             </div>
 
-            <div class="col-md-12 text-center ">
-              <button id="login-button" class="btn btn-block mybtn btn-primary" (click)="login()">Login</button>
+            <div class="text-center ">
+              <button id="login-button" class="btn btn-block mybtn btn-outline-dark" (click)="login()">Login</button>
             </div>
 
-            <div class="col-md-12 ">
+            <div class="">
               <hr>
             </div>
 

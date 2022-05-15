@@ -1,9 +1,10 @@
-<div class="container form-container" id="signing-form-container">
-    <div class="row">
-      <div class="col-md-6 mx-auto">
+<div class="container form-container col-10 col-sm-4 d-flex flex-column justify-content-center" id="signing-form-container">
+  <div class="row">
+    <h1 id="title" class="text-uppercase text-center mt-3">EventPay</h1>
+      <div class="mx-auto">
         <div class="formSign form" data-aos="zoom-in">
           <div class="logo mb-3">
-            <div class="col-md-12 text-center">
+            <div class="text-center" id="login_title">
               <h1>Signup</h1>
             </div>
           </div>
@@ -37,10 +38,10 @@
               <input type="password" name="gesloPotrdi" id="gesloPotrdi" class="form-control">
             </div>
             <hr>
-            <div class="col-md-12 text-center ">
-              <button class="btn btn-block mybtn btn-primary" [routerLink]="'/signin'">Register</button>
+            <div class="text-center ">
+              <button id="login-button" class="btn btn-block mybtn btn-outline-dark" [routerLink]="'/signin'">Register</button>
             </div>
-            <div class="col-md-12 ">
+            <div class="">
               <hr>
             </div>
 
