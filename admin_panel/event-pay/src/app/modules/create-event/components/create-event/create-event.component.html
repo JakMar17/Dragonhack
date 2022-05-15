@@ -1,1 +1,70 @@
-<p>create-event works!</p>
+<div class="card m-3 p-3 col-sm-6">
+    <label for="event-name">Event Name</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="event-name" [(ngModel)]="eventName">
+    </div>
+
+    <label for="location">Location</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="location" [(ngModel)]="location">
+    </div>
+
+    <label for="start-date">Start date</label>
+    <div class="input-group mb-3">
+        <input type="date" class="form-control" name="start-date" [(ngModel)]="startDate">
+    </div>
+
+    <label for="end-date">End date</label>
+    <div class="input-group mb-3">
+        <input type="date" class="form-control" name="end-date" [(ngModel)]="endDate">
+    </div>
+
+    <label for="date-description">Date Description</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="date-description" [(ngModel)]="dateDescription">
+    </div>
+
+    <label for="event-description">Event Description</label>
+    <div class="input-group mb-3">
+        <textarea type="text" class="form-control" name="event-description" [(ngModel)]="description"></textarea>
+    </div>
+
+    <label for="image">Event Image</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="image" placeholder="Paste link from web" [(ngModel)]="image">
+    </div>
+
+    <label for="cardImage">Card Image</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="cardImage" placeholder="Paste link from web" [(ngModel)]="cardImage">
+    </div>
+
+    <label for="trr">IBAN</label>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="trr" [(ngModel)]="trr">
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onPostClick()">
+        Post Event
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ eventName }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to post this event?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

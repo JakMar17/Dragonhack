@@ -12,10 +12,6 @@ const routes: Routes = [
                 loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
             },
             {
-                path: 'my-events',
-                loadChildren: () => import('../my-events/my-events.module').then(m => m.MyEventsModule)
-            },
-            {
                 path: 'create-event',
                 loadChildren: () => import('../create-event/create-event.module').then(m => m.CreateEventModule)
             },

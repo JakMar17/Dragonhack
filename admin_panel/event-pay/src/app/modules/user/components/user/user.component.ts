@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  username: string = 'Kral Matjaž';
+  phone_number: string = '123666999';
+
+  public editMode: boolean = false;
+
+  constructor(
+    protected router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  public toggleEditMode() {
+    this.editMode = !this.editMode;
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/');
   }
 
 }

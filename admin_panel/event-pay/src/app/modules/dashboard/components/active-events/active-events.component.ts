@@ -10,34 +10,23 @@ import { Event } from '../../classes/event.class';
 })
 export class ActiveEventsComponent implements OnInit {
 
-  activeEvents: Observable<Event[]> = new Observable<Event[]>();
+  activeEvents: any;
 
   constructor(
     private eventService: EventService
   ) { }
 
   ngOnInit(): void {
-    
+    this.getAllEvents();
   }
 
-  postEvent() {
-    let e = new Event({
-      eventName: 'Majske igre',
-      description: 'Mi nismo pijanci',
-      location: 'Ljubljana',
-      dates: [{
-        eventStart: new Date(1),
-        eventEnd: new Date(2),
-        description: 'traja za vedno'
-      }],
-      trr: '1231231231',
-      image: 'image',
-      cardImage: 'card image',
-      workerUsername: 'Matjaž Bizjak'
-    });
-    this.activeEvents = this.eventService.getActiveEvents(e);
-    console.log(this.activeEvents);
-    this.activeEvents.subscribe(e => console.log(e));
+  getAllEvents() {
+    this.activeEvents = this.eventService.getAllEvents('Matjaž');
+    console.log(this.activeEvents)
+    this.activeEvents.subscribe((res: any)=>console.log(res))
   }
 
+  log() {
+    this.activeEvents?.subscribe((res: any) => console.log(res))
+  }
 }
