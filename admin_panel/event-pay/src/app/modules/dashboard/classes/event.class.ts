@@ -13,7 +13,7 @@ interface IEvent {
     workerUsername?: string;
 }
 
-interface IDates {
+export interface IDates {
     eventStart?: Date,
     eventEnd?: Date,
     description?: String
