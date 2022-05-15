@@ -1,3 +1,4 @@
+import 'package:eventpay/screens/fillup_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/kartica_details.dart';
@@ -73,6 +74,11 @@ abstract class EPRouter {
       case EPRoute.karticaDetailsScreen:
         return PageRouteBuilder(
           pageBuilder: (context, _, __) => const KarticaDetailsScreen(),
+        );
+
+      case EPRoute.fillUpCard:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => FillupScreen(),
         );
     }
 
