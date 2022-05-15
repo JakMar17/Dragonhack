@@ -3,6 +3,7 @@ package team.marela.dragonhack.backend.api.models.cards;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -11,6 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CardDto {
+    String eventName;
+    LocalDateTime startTime;
+    LocalDateTime endTime;
+
     String cardNumber;
     String image;
     BigDecimal amount;

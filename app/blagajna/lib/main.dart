@@ -1,3 +1,6 @@
+import 'package:blagajna/qr_reader/qr_reader.dart';
+import 'package:blagajna/screens/events_screen.dart';
+import 'package:blagajna/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginScreen(),
+      routes: {
+        '/events': (context) => EventsScreen(),
+      },
     );
   }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.cards.CardDto;
 import team.marela.dragonhack.backend.api.models.cards.TransactionsDto;
 import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
+import team.marela.dragonhack.backend.database.entities.events.EventDayEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.FillUpEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.OrderEntity;
 import team.marela.dragonhack.backend.database.entities.transactions.TransactionEntity;
@@ -18,6 +19,7 @@ import team.marela.dragonhack.backend.exceptions.NegativeBalanceException;
 import team.marela.dragonhack.backend.services.cards.CardServices;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -58,7 +60,7 @@ public class TransactionServices {
     public OrderEntity createOrderOnCard(String cardNumber, BigDecimal amount, String workerUsername) throws DataNotFoundException, NegativeBalanceException {
         var card = cardServices.getCard(cardNumber);
 
-        if(getCardBalance(card).subtract(amount).compareTo(BigDecimal.ZERO) <= 0) {
+        if (getCardBalance(card).subtract(amount).compareTo(BigDecimal.ZERO) <= 0) {
             throw new NegativeBalanceException("Balance is too low");
         }
 
@@ -77,12 +79,12 @@ public class TransactionServices {
         );
 
         var order = orderRepository.save(
-            OrderEntity.builder()
-                    .amount(amount)
-                    .transaction(transaction)
-                    .worker(worker)
-                    .user(user)
-                    .build()
+                OrderEntity.builder()
+                        .amount(amount)
+                        .transaction(transaction)
+                        .worker(worker)
+                        .user(user)
+                        .build()
         );
 
         return order;
@@ -90,6 +92,7 @@ public class TransactionServices {
 
     public CardDto getCardInfo(String cardNumber) throws DataNotFoundException {
         var card = cardServices.getCard(cardNumber);
+        var event = card.getEvent();
 
         var transactions = transactionRepository.findByCard(card);
         var orders = transactions.stream()
@@ -111,13 +114,26 @@ public class TransactionServices {
 
 
         var transactionDtos = Stream.concat(
-                orders.stream(),
-                fillUps.stream()
-        )
+                        orders.stream(),
+                        fillUps.stream()
+                )
                 .sorted(Comparator.comparing(TransactionsDto::getCreated))
                 .toList();
 
         return CardDto.builder()
+                .eventName(event.getEventName())
+                .startTime(
+                        event.getEventDays().stream()
+                                .map(EventDayEntity::getEventStart)
+                                .min(LocalDateTime::compareTo)
+                                .get()
+                )
+                .endTime(
+                        event.getEventDays().stream()
+                                .map(EventDayEntity::getEventEnd)
+                                .max(LocalDateTime::compareTo)
+                                .get()
+                )
                 .image(card.getCardTemplate().getImage())
                 .amount(
                         transactionDtos.stream()

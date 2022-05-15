@@ -26,7 +26,6 @@ public class CardsApi {
     @PostMapping("/create/{eventId}")
     public CardDto createNewCard(@RequestHeader("Username") String username, @PathVariable Integer eventId) throws DataNotFoundException {
         var entity = cardServices.generateNewCard(eventId, username);
-
         return CardDto.builder()
                 .cardNumber(entity.getCardNumber())
                 .image(entity.getCardTemplate().getImage())
