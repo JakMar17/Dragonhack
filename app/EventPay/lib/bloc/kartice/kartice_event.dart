@@ -5,4 +5,10 @@ abstract class _KarticeEvent {}
 
 class _Initialize extends _KarticeEvent {}
 
-class _Reset extends _KarticeEvent {}
+class Reset extends _KarticeEvent {}
+
+class Update extends _KarticeEvent {
+  KarticeState state;
+
+  Update(this.state);
+}

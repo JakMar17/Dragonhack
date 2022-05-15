@@ -142,6 +142,7 @@ public class TransactionServices {
                 )
                 .transactions(transactionDtos)
                 .cardNumber(cardNumber)
+                .location(event.getLocation())
                 .build();
     }
 

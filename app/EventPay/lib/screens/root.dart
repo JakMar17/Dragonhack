@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -45,31 +46,33 @@ class _RootScreen extends StatelessWidget {
               backgroundColor: EPColor.backgroud,
               items: [
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset(EPImage.logo),
-                  activeIcon: SvgPicture.asset(
-                    EPImage.logo,
+                  icon: Icon(Icons.credit_card),
+                  activeIcon: Icon(
+                    Icons.credit_card,
                     color:
-                        CupertinoDynamicColor.resolve(EPColor.primary, context),
+                        EPColor.orange,
                   ),
                   label: "Kartice",
                 ),
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    EPImage.logo,
+                  icon: Icon(
+                    Icons.event,
                   ),
-                  activeIcon: SvgPicture.asset(
-                    EPImage.logo,
+                  activeIcon: Icon(
+                    Icons.event,
                     color:
-                        CupertinoDynamicColor.resolve(EPColor.primary, context),
+                        EPColor.orange,
                   ),
                   label: "Dogodki",
                 ),
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset(EPImage.logo),
-                  activeIcon: SvgPicture.asset(
-                    EPImage.logo,
+                  icon: Icon(
+                    Icons.person
+                  ),
+                  activeIcon: Icon(
+                    Icons.person,
                     color:
-                        CupertinoDynamicColor.resolve(EPColor.primary, context),
+                        EPColor.orange,
                   ),
                   label: "Profil",
                 ),

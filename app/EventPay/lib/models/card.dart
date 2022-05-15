@@ -22,6 +22,8 @@ class EventPayCard {
   /// The amount of the card.
   final num amount;
 
+  final String location;
+
   /// The transactions of the card.
   final List<EventPayTransaction> transactions;
 
@@ -34,6 +36,7 @@ class EventPayCard {
     required this.image,
     required this.amount,
     required this.transactions,
+    required this.location,
   });
 
   /// Constructs new `EventPayCard` object from [json].
@@ -44,6 +47,7 @@ class EventPayCard {
         cardNumber = json[EventPayCardJsonKey.cardNumber],
         image = json[EventPayCardJsonKey.image],
         amount = json[EventPayCardJsonKey.amount],
+        location = json[EventPayCardJsonKey.location],
         transactions = (json[EventPayCardJsonKey.transactions])
             .map<EventPayTransaction>((i) => EventPayTransaction.fromJson(i))
             .toList();
@@ -58,6 +62,7 @@ class EventPayCard {
       EventPayCardJsonKey.cardNumber: cardNumber,
       EventPayCardJsonKey.image: image,
       EventPayCardJsonKey.amount: amount,
+      EventPayCardJsonKey.location: location,
       EventPayCardJsonKey.transactions: jsonEncode(transactions),
     };
   }
@@ -69,6 +74,7 @@ class EventPayCard {
     String? endTime,
     String? cardNumber,
     String? image,
+    String? location,
     num? amount,
     List<EventPayTransaction>? transactions,
   }) {
@@ -80,6 +86,7 @@ class EventPayCard {
       image: image ?? this.image,
       amount: amount ?? this.amount,
       transactions: transactions ?? this.transactions,
+      location: location ?? this.location
     );
   }
 }
@@ -106,4 +113,5 @@ abstract class EventPayCardJsonKey {
 
   /// Key for `EventPayCard.transactions`.
   static const String transactions = 'transactions';
+  static const String location = 'location';
 }

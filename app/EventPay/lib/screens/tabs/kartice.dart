@@ -30,6 +30,9 @@ class _KarticeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           backgroundColor: EPColor.backgroud,
@@ -61,9 +64,10 @@ class _KarticeTab extends StatelessWidget {
                       money: state.cards![index].amount,
                       pic: state.cards![index].image,
                       onTap: () {
+                        context.read<KarticeBloc>().emit(state.copyWith(selectedCard: state.cards![index]));
                         Navigator.pushNamed(
                           context,
-                          EPRoute.karticaDetailsScreen,
+                          "/karticaDetailsScreen",
                         );
                       },
                     ),
