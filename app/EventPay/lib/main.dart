@@ -1,10 +1,7 @@
 import 'dart:io';
 
-<<<<<<< Updated upstream
 import 'package:eventpay/screens/event.dart';
-=======
 import 'package:flutter/cupertino.dart';
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -49,22 +46,10 @@ class VecturaApp extends StatelessWidget {
 
     return CupertinoApp(
       title: 'EventPay',
-<<<<<<< Updated upstream
-      home: EventScreen(),
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.lightBlue[800],
-        fontFamily: 'Roboto',
-      ),
-      // initialRoute: EPRoute.initial,
-      // onGenerateRoute: EPRouter.onGenerateRoute,
-      // navigatorKey: navigatorKey,
-=======
       theme: EPTheme,
       initialRoute: EPRoute.initial,
       onGenerateRoute: EPRouter.onGenerateRoute,
       navigatorKey: navigatorKey,
->>>>>>> Stashed changes
     );
   }
 }
