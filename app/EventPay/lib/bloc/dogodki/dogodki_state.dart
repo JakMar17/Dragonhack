@@ -3,33 +3,28 @@ part of 'dogodki_bloc.dart';
 @immutable
 class DogodkiState {
   final bool initialized;
-  final int page;
-  final int pageSize;
+  final List<EventPayEvent>? cards;
   final Failure? failure;
 
   const DogodkiState({
     required this.initialized,
-    required this.page,
-    required this.pageSize,
+    required this.cards,
     required this.failure,
   });
 
   const DogodkiState.initial()
       : initialized = false,
-        page = 0,
-        pageSize = 10,
+        cards = null,
         failure = null;
 
   DogodkiState copyWith({
     bool? initialized,
-    int? page,
-    int? pageSize,
+    List<EventPayEvent>? cards,
     Failure? failure,
   }) {
     return DogodkiState(
       initialized: initialized ?? this.initialized,
-      page: page ?? this.page,
-      pageSize: pageSize ?? this.pageSize,
+      cards: cards ?? this.cards,
       failure: failure,
     );
   }

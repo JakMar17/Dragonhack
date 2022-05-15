@@ -45,28 +45,9 @@ class _ProfilTab extends StatelessWidget {
           style: EPStyles.pageTitleTextStyle(context),
         ),
       ),
-      child: BlocConsumer<ProfilBloc, ProfilState>(
-        listener: ((context, state) {
-          if (state.failure is BackendFailure) {
-            showCupertinoDialog(
-                context: context,
-                builder: (context2) {
-                  return CupertinoAlertDialog(
-                    title: const Text("Can't load data"),
-                    actions: <Widget>[
-                      CupertinoDialogAction(
-                          isDefaultAction: true,
-                          child: const Text("Retry"),
-                          onPressed: () {
-                            Navigator.of(context2).pop();
-                            bloc.reset();
-                          })
-                    ],
-                  );
-                });
-          }
-        }),
+      child: BlocBuilder<ProfilBloc, ProfilState>(
         builder: (context, state) {
+          print("profil state: ${state.user}");
           if (state.isLoading) {
             return const Center(
               child: LoadingIndicator(

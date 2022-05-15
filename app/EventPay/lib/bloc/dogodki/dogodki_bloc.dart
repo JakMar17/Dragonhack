@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:eventpay/bloc/global/global_bloc.dart';
+import 'package:eventpay/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -41,7 +42,12 @@ class DogodkiBloc extends Bloc<_DogodkiEvent, DogodkiState> {
     _Initialize event,
     Emitter<DogodkiState> emit,
   ) async {
-    emit(state.copyWith(initialized: true, page: state.page + 1));
+    BackendService _backendService = BackendService.instance;
+    Either<BackendFailure, List<EventPayEvent>> cardsOrFailure =
+        await _backendService.getEvents();
+    print("cardsOrFailure: $cardsOrFailure");
+    if (cardsOrFailure.isError()) return null;
+    emit(state.copyWith(initialized: true, cards: cardsOrFailure.value));
   }
 
   FutureOr<void> _onNewPageFetch(
@@ -55,6 +61,6 @@ class DogodkiBloc extends Bloc<_DogodkiEvent, DogodkiState> {
     _Refresh event,
     Emitter<DogodkiState> emit,
   ) async {
-    emit(state.copyWith(page: 1, failure: null));
+    //emit(state.copyWith(page: 1, failure: null));
   }
 }
