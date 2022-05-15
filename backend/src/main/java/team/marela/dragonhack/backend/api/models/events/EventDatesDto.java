@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventDatesDto {
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    LocalDateTime eventStart;
+    LocalDateTime eventEnd;
 }

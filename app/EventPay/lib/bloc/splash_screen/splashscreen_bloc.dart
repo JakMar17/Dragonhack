@@ -70,10 +70,11 @@ class SplashScreenBloc extends Bloc<_SplashScreenEvent, SplashScreenState> {
     final LocalStorage storage = LocalStorage('user');
 
     EventPayUser? user = await storage.getItem('user');
+    print("USER: $user");
 
     if (user == null) {
       return EPRoute.signIn;
     }
-    return EPRoute.home;
+    return EPRoute.kartice;
   }
 }

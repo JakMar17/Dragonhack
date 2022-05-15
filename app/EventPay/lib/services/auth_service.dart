@@ -30,8 +30,6 @@ class AuthService {
       String username, String password) async {
     final http.Response? response = await _http.post(
       [
-        EPServerRoute.api,
-        EPServerRoute.apiAuth,
         EPServerRoute.apiAuthLogin,
       ],
       headers: <String, String>{
@@ -88,7 +86,7 @@ class AuthService {
     );
 
     if (response == null) return error(const UnknownBackendFailure());
-    print(response.statusCode);
+    print("response.statusCode: ${response.statusCode}");
 
     switch (response.statusCode) {
       case HttpStatus.created:

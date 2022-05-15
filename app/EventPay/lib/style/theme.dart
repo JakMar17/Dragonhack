@@ -4,5 +4,5 @@ import 'colors.dart';
 import 'styles.dart';
 
 final ThemeData EPTheme = ThemeData(
-  primaryColor: VecColor.primary,
+  primaryColor: EPColor.primary,
 );

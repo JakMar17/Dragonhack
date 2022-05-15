@@ -7,9 +7,9 @@ class SubmitSignIn extends SignInEvent {
   SubmitSignIn();
 }
 
-class EmailChanged extends SignInEvent {
+class UsernameChanged extends SignInEvent {
   final String value;
-  EmailChanged(this.value);
+  UsernameChanged(this.value);
 }
 
 class PasswordChanged extends SignInEvent {

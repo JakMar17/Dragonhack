@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 /// Provides color palette for EventPay app.
-abstract class VecColor {
+abstract class EPColor {
   /// Primary color. Used for filled buttons.
   static const CupertinoDynamicColor primary =
       CupertinoDynamicColor.withBrightness(
@@ -52,7 +52,7 @@ abstract class VecColor {
   static const Color transparent = Color(0x00000000);
 
   static Color primaryColor(BuildContext context) {
-    return CupertinoDynamicColor.resolve(VecColor.primary, context);
+    return CupertinoDynamicColor.resolve(EPColor.primary, context);
   }
 
   static Color resolveColor(BuildContext context, Color color) {
@@ -60,4 +60,9 @@ abstract class VecColor {
   }
 
   static const Color yellow = Color(0xFFF3BE00);
+
+
+  static const Color almostBlack = Color(0xFF0C1017);
+  static const Color orange = Color(0xFFF75423);
+  // static const /*  */
 }

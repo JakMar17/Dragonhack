@@ -18,10 +18,11 @@ import 'loading_indicator.dart';
 import 'sign_in.dart';
 
 class RegistrationScreenArgs {
-  final String email;
+  final String username;
   final String password;
 
-  const RegistrationScreenArgs({required this.email, required this.password});
+  const RegistrationScreenArgs(
+      {required this.username, required this.password});
 }
 
 class RegistrationScreen extends StatelessWidget {
@@ -49,12 +50,12 @@ class _RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final RegisterBloc bloc = BlocProvider.of<RegisterBloc>(context);
-    final TextEditingController emailController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
-    if (args.email.isNotEmpty) {
-      emailController.text = args.email;
-      bloc.emailChanged(args.email);
+    if (args.username.isNotEmpty) {
+      usernameController.text = args.username;
+      bloc.usernameChanged(args.username);
     }
     if (args.password.isNotEmpty) {
       passwordController.text = args.password;
@@ -71,6 +72,7 @@ class _RegisterScreen extends StatelessWidget {
     }, builder: (context, state) {
       final String? errorMessage;
 
+      print("state.failure: ${state.failure}");
       if (state.failure == null) {
         errorMessage = null;
       } else if (state.failure is EmailValidationFailure) {
@@ -109,22 +111,20 @@ class _RegisterScreen extends StatelessWidget {
                     Hero(
                       tag: 'logo',
                       child: SvgPicture.asset(
-                        VecImage.logo,
-                        color: VecColor.primaryColor(context),
+                        EPImage.logo,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
                     const SizedBox(
-                      height: 70,
+                      height: 50,
                     ),
-                    Hero(
-                      tag: 'email',
-                      child: VecTextField(
-                        placeholder: 'Email',
-                        onChanged: bloc.emailChanged,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
-                        textInputAction: TextInputAction.next,
-                      ),
+                    VecTextField(
+                      placeholder: 'Email',
+                      onChanged: bloc.emailChanged,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(
                       height: 12,
@@ -156,17 +156,19 @@ class _RegisterScreen extends StatelessWidget {
                       onChanged: bloc.lastnameChanged,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
-                      obscureText: false,
                     ),
                     const SizedBox(
                       height: 12,
                     ),
-                    VecTextField(
-                      placeholder: 'Username',
-                      onChanged: bloc.usernameChanged,
-                      keyboardType: TextInputType.name,
-                      obscureText: false,
-                      textInputAction: TextInputAction.done,
+                    Hero(
+                      tag: 'username',
+                      child: VecTextField(
+                        placeholder: 'Username',
+                        onChanged: bloc.usernameChanged,
+                        keyboardType: TextInputType.name,
+                        controller: usernameController,
+                        textInputAction: TextInputAction.done,
+                      ),
                     ),
                     if (errorMessage != null) ...[
                       const SizedBox(
@@ -176,7 +178,7 @@ class _RegisterScreen extends StatelessWidget {
                         errorMessage,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            color: VecColor.primaryContrastingColor),
+                            color: EPColor.primaryContrastingColor),
                       ),
                     ],
                   ],
@@ -194,7 +196,7 @@ class _RegisterScreen extends StatelessWidget {
                     child: VecTextShadowButton.filled(
                       text: "Register",
                       textStyle: VecStyles.buttonTextStyle(context),
-                      color: VecColor.backgroud,
+                      color: EPColor.backgroud,
                       onPressed: bloc.state.isLoading ? null : bloc.register,
                       child: bloc.state.isLoading
                           ? const LoadingIndicator(radius: 12, dotRadius: 3.81)
@@ -207,7 +209,7 @@ class _RegisterScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: VecTextShadowButton.filled(
-                      color: VecColor.backgroud,
+                      color: EPColor.backgroud,
                       text: "Already a user",
                       textStyle: VecStyles.buttonTextStyle(context),
                       onPressed: () {
@@ -215,7 +217,7 @@ class _RegisterScreen extends StatelessWidget {
                           context,
                           EPRoute.signIn,
                           arguments: SignInScreenArgs(
-                            email: state.email,
+                            username: state.username,
                             password: state.password,
                           ),
                         );

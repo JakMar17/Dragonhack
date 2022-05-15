@@ -36,8 +36,8 @@ class VecTextField extends StatelessWidget {
         controller: controller,
         readOnly: readOnly,
         decoration: const BoxDecoration(
-            borderRadius: kBorderRadius, color: VecColor.highlightColor),
-        placeholderStyle: const TextStyle(color: VecColor.placeholderColor),
+            borderRadius: kBorderRadius, color: EPColor.highlightColor),
+        placeholderStyle: const TextStyle(color: EPColor.placeholderColor),
         onChanged: onChanged,
         placeholder: placeholder,
         keyboardType: keyboardType,

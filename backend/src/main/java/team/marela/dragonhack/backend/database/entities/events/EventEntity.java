@@ -3,9 +3,9 @@ package team.marela.dragonhack.backend.database.entities.events;
 import lombok.*;
 import team.marela.dragonhack.backend.database.entities.cards.CardEntity;
 import team.marela.dragonhack.backend.database.entities.cards.CardTemplateEntity;
+import team.marela.dragonhack.backend.database.entities.events.price_menu.PriceItemEntity;
 import team.marela.dragonhack.backend.database.entities.organization.OrganizationEntity;
 import team.marela.dragonhack.backend.database.entities.organization.WorkerEntity;
-import team.marela.dragonhack.backend.database.entities.events.price_menu.PriceItemEntity;
 
 import javax.persistence.*;
 import java.util.Set;
