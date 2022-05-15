@@ -5,4 +5,6 @@ abstract class EPServerRoute {
   static const String apiAuthLogin = 'login';
   static const String apiAuthRegister = 'register';
   static const String apiAuthRefresh = 'refresh';
+  static const String apiAuthEvents = 'events';
+  static const String apiAuthCards = 'cards';
 }

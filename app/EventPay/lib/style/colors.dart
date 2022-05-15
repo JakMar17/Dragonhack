@@ -5,8 +5,8 @@ abstract class EPColor {
   /// Primary color. Used for filled buttons.
   static const CupertinoDynamicColor primary =
       CupertinoDynamicColor.withBrightness(
-    color: Color(0xff001898),
-    darkColor: Color(0xff00A7DC),
+    color: Color(0xff243048),
+    darkColor: Color(0xffC4C4C4),
   );
 
   static const CupertinoDynamicColor primaryContrastingColor =
@@ -23,8 +23,8 @@ abstract class EPColor {
 
   static const CupertinoDynamicColor backgroud =
       CupertinoDynamicColor.withBrightness(
-    color: Color(0xffF2F2F2),
-    darkColor: Color(0xff181818),
+    color: Color(0xffC4C4C4),
+    darkColor: Color(0xff0C1017),
   );
 
   static const CupertinoDynamicColor strong =

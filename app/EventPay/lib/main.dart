@@ -1,6 +1,10 @@
 import 'dart:io';
 
+<<<<<<< Updated upstream
 import 'package:eventpay/screens/event.dart';
+=======
+import 'package:flutter/cupertino.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +14,7 @@ import 'router/routes.dart';
 import 'services/auth_service.dart';
 import 'services/backend_service.dart';
 import 'services/http_service.dart';
+import 'style/theme.dart';
 import 'util/logger.dart';
 
 void main() {
@@ -25,13 +30,13 @@ void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(EventPayApp(navigatorKey: navigatorKey));
+  runApp(VecturaApp(navigatorKey: navigatorKey));
 }
 
-class EventPayApp extends StatelessWidget {
+class VecturaApp extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
 
-  const EventPayApp({
+  const VecturaApp({
     Key? key,
     required this.navigatorKey,
   }) : super(key: key);
@@ -42,8 +47,9 @@ class EventPayApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
 
-    return MaterialApp(
+    return CupertinoApp(
       title: 'EventPay',
+<<<<<<< Updated upstream
       home: EventScreen(),
       theme: ThemeData(
         brightness: Brightness.light,
@@ -53,6 +59,12 @@ class EventPayApp extends StatelessWidget {
       // initialRoute: EPRoute.initial,
       // onGenerateRoute: EPRouter.onGenerateRoute,
       // navigatorKey: navigatorKey,
+=======
+      theme: EPTheme,
+      initialRoute: EPRoute.initial,
+      onGenerateRoute: EPRouter.onGenerateRoute,
+      navigatorKey: navigatorKey,
+>>>>>>> Stashed changes
     );
   }
 }

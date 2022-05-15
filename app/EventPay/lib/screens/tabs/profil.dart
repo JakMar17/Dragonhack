@@ -42,7 +42,7 @@ class _ProfilTab extends StatelessWidget {
         backgroundColor: EPColor.backgroud,
         middle: Text(
           "Profil",
-          style: VecStyles.pageTitleTextStyle(context),
+          style: EPStyles.pageTitleTextStyle(context),
         ),
       ),
       child: BlocConsumer<ProfilBloc, ProfilState>(
