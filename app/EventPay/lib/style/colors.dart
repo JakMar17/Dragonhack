@@ -64,5 +64,6 @@ abstract class EPColor {
 
   static const Color almostBlack = Color(0xFF0C1017);
   static const Color orange = Color(0xFFF75423);
+  static const Color secondary = Color(0xFF466C6E);
   // static const /*  */
 }

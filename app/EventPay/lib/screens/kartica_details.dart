@@ -37,10 +37,11 @@ class _KarticaDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return BlocBuilder<KarticeBloc, KarticeState>(
       builder: (context, state) {
-        /* print("state: ${state.cards}");
-        final List<EventPayCard>? card = state.cards; */
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
             backgroundColor: EPColor.backgroud,
@@ -62,152 +63,199 @@ class _KarticaDetailsScreen extends StatelessWidget {
                 return Container(
                     color: EPColor.resolveColor(context, EPColor.backgroud));
               }
-              return Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        SizedBox(
-                          height: 200,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              SvgPicture.asset(EPImage.logo, fit: BoxFit.cover),
-                              ClipRRect(
-                                // Clip it cleanly.
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                  child: Container(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    alignment: Alignment.center,
-                                    child: Text('CHOCOLATE'),
+              if (state.selectedCard != null) {
+                final card = state.cards![0];
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: h * 0.03),
+                          child: GestureDetector(
+                            onTap: () {
+                              SizedBox(
+                                height: 200,
+                                child: Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    SvgPicture.asset(EPImage.logo,
+                                        fit: BoxFit.cover),
+                                    ClipRRect(
+                                      // Clip it cleanly.
+                                      child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 10, sigmaY: 10),
+                                        child: Container(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          alignment: Alignment.center,
+                                          child: Text('CHOCOLATE'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(24.0)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          card.image,
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
+                                  width: double.infinity,
+                                  height: h * 0.28,
+                                ),
+                                Container(
+                                  // margin: const EdgeInsets.symmetric(horizontal: 20),
+                                  margin: EdgeInsets.only(top: h * 0.15),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          'https://i.stack.imgur.com/YLy3V.png'),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  width: h * 0.2,
+                                  height: h * 0.2,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Center(
+                          child: Text(
+                            "${card.amount}€",
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.w300,
+                              color: EPColor.highlightColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(child: const SizedBox(height: 20)),
+                      SliverToBoxAdapter(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_month,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Datum",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: EPColor.highlightColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SliverToBoxAdapter(child: const SizedBox(height: 5)),
+                      SliverToBoxAdapter(
+                        child: const Text(
+                          "3. 5. 2022 - 24. 5. 2022",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: EPColor.highlightColor,
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(child: const SizedBox(height: 20)),
+                      SliverToBoxAdapter(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_city,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            const Text(
+                              "Lokacija",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: EPColor.highlightColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SliverToBoxAdapter(child: const SizedBox(height: 2)),
+                      SliverToBoxAdapter(
+                        child: Text(
+                          "${card.location}",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: EPColor.highlightColor,
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: h * 0.04),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: VecTextShadowButton.filled(
+                                  text: "Polni kartico",
+                                  textStyle: EPStyles.buttonTextStyle(context),
+                                  color: EPColor.orange,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: VecTextShadowButton.filled(
+                                  color: EPColor.secondary,
+                                  text: "Transakcije",
+                                  textStyle: EPStyles.buttonTextStyle(context),
+                                  onPressed: () {},
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: VecTextShadowButton.filled(
+                                  color: EPColor.secondary,
+                                  text: "Prikaži cenik",
+                                  textStyle: EPStyles.buttonTextStyle(context),
+                                  onPressed: () {},
                                 ),
                               ),
                             ],
                           ),
-                        );
-                      },
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(24.0)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            width: double.infinity,
-                            height: 170,
-                          ),
-                          Positioned(
-                            top: 21,
-                            left: 90,
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://i.stack.imgur.com/YLy3V.png'),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              width: 128,
-                              height: 128,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Text(
-                      "23.00€",
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: EPColor.highlightColor,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "DATUM",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: EPColor.highlightColor,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    const Text(
-                      "3. 5. 2022 - 24. 5. 2022",
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: EPColor.highlightColor,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "LOKACIJA",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: EPColor.highlightColor,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    const Text(
-                      "ROŽNA DOLINA",
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: EPColor.highlightColor,
-                      ),
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: VecTextShadowButton.filled(
-                            text: "POLNI KATICO",
-                            textStyle: EPStyles.buttonTextStyle(context),
-                            color: EPColor.backgroud,
-                            onPressed: () {},
-                          ),
                         ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: VecTextShadowButton.filled(
-                            color: EPColor.backgroud,
-                            text: "TRANSAKCIJE",
-                            textStyle: EPStyles.buttonTextStyle(context),
-                            onPressed: () {},
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: VecTextShadowButton.filled(
-                            color: EPColor.backgroud,
-                            text: "PRIKAŽI CENIK",
-                            textStyle: EPStyles.buttonTextStyle(context),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return Container();
             },
           ),
         );

@@ -16,6 +16,8 @@ public class CardDto {
     LocalDateTime startTime;
     LocalDateTime endTime;
 
+    String location;
+
     String cardNumber;
     String image;
     BigDecimal amount;

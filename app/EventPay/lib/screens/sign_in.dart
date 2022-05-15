@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -91,21 +92,32 @@ class _SignInScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Center(
+                  child: Text(
+                    "EventPay",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
                 Column(
                   children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Hero(
-                      tag: 'logo',
-                      child: SvgPicture.asset(
-                        EPImage.logo,
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
+                    // const SizedBox(
+                    //   height: 50,
+                    // ),
+                    // Hero(
+                    //   tag: 'logo',
+                    //   child: SvgPicture.asset(
+                    //     EPImage.logo,
+                    //     height: 100,
+                    //     width: 100,
+                    //     fit: BoxFit.scaleDown,
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 70,
                     ),
@@ -146,14 +158,14 @@ class _SignInScreen extends StatelessWidget {
                     ],
                   ],
                 ),
-                const Spacer(),
+                // const Spacer(),
                 Column(
                   children: [
                     SizedBox(
                       width: double.infinity,
                       child: VecTextShadowButton.filled(
                         text: "Login",
-                        color: EPColor.backgroud,
+                        color: EPColor.orange,
                         onPressed: bloc.state.isLoading ? null : bloc.signIn,
                         textStyle: EPStyles.buttonTextStyle(context),
                         child: bloc.state.isLoading
@@ -168,7 +180,7 @@ class _SignInScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: VecTextShadowButton.filled(
-                        color: EPColor.backgroud,
+                        color: EPColor.secondary,
                         text: "Create new user",
                         textStyle: EPStyles.buttonTextStyle(context),
                         onPressed: () {
