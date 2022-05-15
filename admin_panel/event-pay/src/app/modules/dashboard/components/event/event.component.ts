@@ -9,6 +9,9 @@ import { Event } from '../../classes/event.class';
 })
 export class EventComponent implements OnInit {
 
+  public event: Event = new Event({});
+  public subEvents: any[] = [];
+
   constructor(
     protected activatedRoute: ActivatedRoute
   ) { }
@@ -16,9 +19,13 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params => {
-      let id = params['event_id'];
-
-      console.log(id);
+      this.event.endDate = params['endDate'];
+      this.event.eventId = params['eventId'];
+      this.subEvents = params['eventDates'];
+      this.event.eventName = params['eventName'];
+      this.event.image = params['image'];
+      this.event.location = params['location']; 
+      this.event.startDate = params['startDate'];
     });
 
   }

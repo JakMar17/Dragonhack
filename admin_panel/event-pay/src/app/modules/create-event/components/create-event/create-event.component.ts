@@ -45,9 +45,7 @@ export class CreateEventComponent implements OnInit {
       workerUsername: localStorage.getItem('username')?.toString()
     });
 
-    console.log(newEvent);
     let res = this.eventService.postEvent(newEvent);
-    res.subscribe((r:any)=>console.log(r))
   }
 
 }

@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  username: string = 'Kral Matjaž';
-  phone_number: string = '123666999';
+  firstName: string | null = localStorage.getItem('firstname');
+  lastName: string | null = localStorage.getItem('lastname');
+  email: string | null = localStorage.getItem('email');
 
   public editMode: boolean = false;
 
