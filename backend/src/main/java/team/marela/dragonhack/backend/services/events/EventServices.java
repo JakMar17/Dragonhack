@@ -3,6 +3,7 @@ package team.marela.dragonhack.backend.services.events;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.marela.dragonhack.backend.api.models.events.EventCreateDto;
+import team.marela.dragonhack.backend.api.models.events.EventDatesDto;
 import team.marela.dragonhack.backend.api.models.events.EventDto;
 import team.marela.dragonhack.backend.database.entities.cards.CardTemplateEntity;
 import team.marela.dragonhack.backend.database.entities.events.EventDayEntity;
@@ -98,6 +99,14 @@ public class EventServices {
                                                 .map(EventDayEntity::getEventEnd)
                                                 .max(LocalDateTime::compareTo)
                                                 .get()
+                                )
+                                .eventDates(
+                                        e.getEventDays().stream()
+                                                .map(date -> EventDatesDto.builder()
+                                                        .eventStart(date.getEventStart())
+                                                        .eventEnd(date.getEventEnd())
+                                                        .build()
+                                                ).toList()
                                 )
                                 .build()
                 )

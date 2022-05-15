@@ -3,6 +3,7 @@ package team.marela.dragonhack.backend.api.models.events;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,4 +17,5 @@ public class EventDto {
     String image;
     LocalDateTime startDate;
     LocalDateTime endDate;
+    List<EventDatesDto> eventDates;
 }
