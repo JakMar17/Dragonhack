@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Event } from '../../classes/event.class';
-import { IDates } from '../../classes/event.class'
 
 @Component({
   selector: 'app-event',

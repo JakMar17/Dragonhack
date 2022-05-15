@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { EventService } from 'src/app/modules/share/services/event.service';
 
 @Component({
