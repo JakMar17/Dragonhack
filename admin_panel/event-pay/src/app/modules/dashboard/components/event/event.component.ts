@@ -26,7 +26,7 @@ export class EventComponent implements OnInit {
       this.event.eventName = params['eventName'];
       this.event.image = params['image'];
       this.event.location = params['location']; 
-      this.event.startDate = params['startDate'];debugger;
+      this.event.startDate = params['startDate'];
     });
 
   }

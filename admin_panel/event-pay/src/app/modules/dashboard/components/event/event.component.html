@@ -1,9 +1,9 @@
-<div class="card m-3 p-3">
-    <div class="p-0 col-12 d-flex align-items-start">
-        <div class="align-self-start col-4">
+<div class="card m-3 p-3 d-flex">
+    <div class="p-0 col-12 d-flex align-items-start d-flex flex-column flex-sm-row">
+        <div class="align-self-start col-12 col-sm-4">
             <img [src]="event?.image" class="img-fluid rounded" alt="">
         </div>
-        <div class="d-flex flex-column col-4">
+        <div class="d-flex flex-column col-12 col-sm-4">
             <h1>{{ event?.eventName }}</h1>
             <h3>{{ event?.location }}</h3>
             <div>
@@ -12,21 +12,15 @@
                 <span>{{ event?.endDate | date}}</span>
             </div>
         </div>
-        <div class="d-flex flex-column col-4">
-            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-                <ngb-panel *ngFor="let subEvent of subEvents">
-                    <ng-template ngbPanelContent>
-                        <div>
-                            <span>{{ subEvent.eventStart | date}}</span>
-                            <span> - </span>
-                            <span>{{ subEvent?.eventEnd | date}}</span>
-                        </div>
-                        <p>
-                            {{ subEvent?.description}}
-                        </p>
-                    </ng-template>
-                </ngb-panel>
-            </ngb-accordion>
+        <div class="d-flex flex-column col-12 col-sm-4">
+            <div class="d-flex justify-content-center">
+                <button type="button" class="m-3 btn btn-outline-dark">
+                    Edit
+                </button>
+                <button type="button" class="m-3 btn btn-outline-danger">
+                    Delete
+                </button>
+            </div>
         </div>
     </div>
 </div>
