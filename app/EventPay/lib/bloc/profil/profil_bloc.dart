@@ -16,8 +16,6 @@ part 'profil_state.dart';
 class ProfilBloc extends Bloc<ProfilEvent, ProfilState> {
   final BackendService _backendService;
   final GlobalBloc _globalBloc;
-  late final StreamSubscription _profilImageSubscription;
-  late final StreamSubscription _userSubscription;
 
   ProfilBloc({
     required BackendService backendService,
@@ -30,16 +28,11 @@ class ProfilBloc extends Bloc<ProfilEvent, ProfilState> {
     on<_ReloadUser>(_onReloadUser);
     on<_Reset>(_onReset);
 
-    _userSubscription =
-        _globalBloc.globalUserStream.listen((_) => add(const _ReloadUser()));
-
     add(const _Initialize());
   }
 
   @override
   Future<void> close() async {
-    await _profilImageSubscription.cancel();
-    await _userSubscription.cancel();
     return super.close();
   }
 

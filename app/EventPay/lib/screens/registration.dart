@@ -178,6 +178,7 @@ class _RegisterScreen extends StatelessWidget {
                         errorMessage,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                            fontSize: 12,
                             color: EPColor.primaryContrastingColor),
                       ),
                     ],
@@ -195,7 +196,7 @@ class _RegisterScreen extends StatelessWidget {
                     width: double.infinity,
                     child: VecTextShadowButton.filled(
                       text: "Register",
-                      textStyle: VecStyles.buttonTextStyle(context),
+                      textStyle: EPStyles.buttonTextStyle(context),
                       color: EPColor.backgroud,
                       onPressed: bloc.state.isLoading ? null : bloc.register,
                       child: bloc.state.isLoading
@@ -211,7 +212,7 @@ class _RegisterScreen extends StatelessWidget {
                     child: VecTextShadowButton.filled(
                       color: EPColor.backgroud,
                       text: "Already a user",
-                      textStyle: VecStyles.buttonTextStyle(context),
+                      textStyle: EPStyles.buttonTextStyle(context),
                       onPressed: () {
                         Navigator.pushNamed(
                           context,

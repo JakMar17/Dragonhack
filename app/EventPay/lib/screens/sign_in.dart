@@ -140,6 +140,7 @@ class _SignInScreen extends StatelessWidget {
                         errorMessage,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                            fontSize: 12,
                             color: EPColor.primaryContrastingColor),
                       ),
                     ],
@@ -154,7 +155,7 @@ class _SignInScreen extends StatelessWidget {
                         text: "Login",
                         color: EPColor.backgroud,
                         onPressed: bloc.state.isLoading ? null : bloc.signIn,
-                        textStyle: VecStyles.buttonTextStyle(context),
+                        textStyle: EPStyles.buttonTextStyle(context),
                         child: bloc.state.isLoading
                             ? const LoadingIndicator(
                                 radius: 12, dotRadius: 3.81)
@@ -169,7 +170,7 @@ class _SignInScreen extends StatelessWidget {
                       child: VecTextShadowButton.filled(
                         color: EPColor.backgroud,
                         text: "Create new user",
-                        textStyle: VecStyles.buttonTextStyle(context),
+                        textStyle: EPStyles.buttonTextStyle(context),
                         onPressed: () {
                           Navigator.pushNamed(
                             context,

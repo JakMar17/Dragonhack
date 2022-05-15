@@ -31,7 +31,7 @@ class _DogodkiTab extends StatelessWidget {
         backgroundColor: EPColor.backgroud,
         middle: Text(
           "Dogodki",
-          style: VecStyles.pageTitleTextStyle(context),
+          style: EPStyles.pageTitleTextStyle(context),
         ),
       ),
       child: BlocConsumer<DogodkiBloc, DogodkiState>(

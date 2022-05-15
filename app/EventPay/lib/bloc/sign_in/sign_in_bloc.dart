@@ -63,6 +63,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
 
     _globalBloc.updateUser(userOrFailure.value);
+    print("global user: ${_globalBloc.state.user!.username}");
     final LocalStorage storage = LocalStorage('user');
     storage.setItem('user', userOrFailure);
     print("storage.getItem('user'): ${storage.getItem('user')}");

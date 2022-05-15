@@ -75,6 +75,6 @@ class SplashScreenBloc extends Bloc<_SplashScreenEvent, SplashScreenState> {
     if (user == null) {
       return EPRoute.signIn;
     }
-    return EPRoute.kartice;
+    return EPRoute.root;
   }
 }

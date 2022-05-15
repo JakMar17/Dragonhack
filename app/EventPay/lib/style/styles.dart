@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'colors.dart';
 
-/// Provides text styles for Vectura app.
-abstract class VecStyles {
+/// Provides text styles for EventPay app.
+abstract class EPStyles {
   static const CupertinoTextThemeData textTheme = CupertinoTextThemeData(
     primaryColor: EPColor.primary,
     textStyle: TextStyle(

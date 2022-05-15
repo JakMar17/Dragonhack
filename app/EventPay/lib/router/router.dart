@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/kartica_details.dart';
 import '../screens/root.dart';
 import '../screens/tabs/dogodki.dart';
 import '../screens/tabs/kartice.dart';
@@ -67,6 +68,11 @@ abstract class EPRouter {
           reverseTransitionDuration: const Duration(milliseconds: 0),
           transitionDuration: const Duration(milliseconds: 0),
           pageBuilder: (context, _, __) => const ProfilTab(),
+        );
+
+      case EPRoute.karticaDetailsScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => const KarticaDetailsScreen(),
         );
     }
 

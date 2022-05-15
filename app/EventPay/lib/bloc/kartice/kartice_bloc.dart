@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:eventpay/models/card.dart';
 import 'package:meta/meta.dart';
 
 import '../../services/backend_service.dart';
@@ -12,8 +13,6 @@ part 'kartice_event.dart';
 part 'kartice_state.dart';
 
 class KarticeBloc extends Bloc<_KarticeEvent, KarticeState> {
-  late final StreamSubscription _offersSubscription;
-  late final StreamSubscription _ridesSubscription;
   final GlobalBloc _globalBloc;
   KarticeBloc({required GlobalBloc globalBloc})
       : _globalBloc = globalBloc,
@@ -26,8 +25,6 @@ class KarticeBloc extends Bloc<_KarticeEvent, KarticeState> {
 
   @override
   Future<void> close() async {
-    await _ridesSubscription.cancel();
-    await _offersSubscription.cancel();
     return super.close();
   }
 
@@ -35,7 +32,12 @@ class KarticeBloc extends Bloc<_KarticeEvent, KarticeState> {
     _Initialize event,
     Emitter<KarticeState> emit,
   ) async {
-    emit(state.copyWith(initialized: true));
+    BackendService _backendService = BackendService.instance;
+    Either<BackendFailure, List<EventPayCard>> cardsOrFailure =
+        await _backendService.getCards();
+    print("cardsOrFailure: $cardsOrFailure");
+    if (cardsOrFailure.isError()) return null;
+    emit(state.copyWith(initialized: true, cards: cardsOrFailure.value));
   }
 
   FutureOr<void> _onReset(

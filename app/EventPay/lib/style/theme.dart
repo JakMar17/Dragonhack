@@ -1,8 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'colors.dart';
 import 'styles.dart';
 
-final ThemeData EPTheme = ThemeData(
+const CupertinoThemeData EPTheme = CupertinoThemeData(
   primaryColor: EPColor.primary,
+  primaryContrastingColor: EPColor.primaryContrastingColor,
+  textTheme: EPStyles.textTheme,
+  barBackgroundColor: EPColor.primaryContrastingColor,
+  scaffoldBackgroundColor: EPColor.backgroud,
 );
