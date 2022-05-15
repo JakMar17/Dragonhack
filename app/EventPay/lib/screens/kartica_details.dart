@@ -230,7 +230,7 @@ class _KarticaDetailsScreen extends StatelessWidget {
                                   text: "Polni kartico",
                                   textStyle: EPStyles.buttonTextStyle(context),
                                   color: EPColor.orange,
-                                  onPressed: () {},
+                                  onPressed: () => Navigator.pushNamed(context, EPRoute.fillUpCard),
                                 ),
                               ),
                               const SizedBox(

@@ -8,8 +8,12 @@
         <img class="img-fluid rounded p-2" src="../../../../../assets/images/logo.png" alt="">
     
         <div *ngIf="!editMode else editModeTemp" class="col-12">
-            <h3>{{ username }}</h3>
-            <h3>{{ phone_number}}</h3>
+            <div>
+                <span><h3>{{ firstName }}</h3></span>
+                <span><h3>{{ lastName}}</h3></span>
+            </div>
+            
+            <h5>{{ email }}</h5>
 
             <div class="d-flex justify-content-center">
                 <button type="button" class="m-3 btn btn-outline-dark" (click)="toggleEditMode()">
@@ -27,21 +31,31 @@
             <div class="form-group">
                 <input 
                     type="text" 
-                    name="username" 
+                    name="fisrName" 
                     class="form-control" 
-                    id="username" 
-                    [(ngModel)]="username"
-                    placeholder="Username"
+                    id="firstName" 
+                    [(ngModel)]="firstName"
+                    placeholder="First Name"
                     aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <input 
                     type="text" 
-                    name="username" 
+                    name="lastName" 
                     class="form-control" 
-                    id="username" 
-                    [(ngModel)]="phone_number"
-                    placeholder="Phone number"
+                    id="lastName" 
+                    [(ngModel)]="lastName"
+                    placeholder="Last Name"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <input 
+                    type="email" 
+                    name="email" 
+                    class="form-control" 
+                    id="email" 
+                    [(ngModel)]="email"
+                    placeholder="Email"
                     aria-describedby="emailHelp">
             </div>
             <button type="button" class="btn btn-outline-success" (click)="toggleEditMode()">

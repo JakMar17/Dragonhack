@@ -1,3 +1,4 @@
+import 'package:eventpay/screens/fillup_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/dogodki_details.dart';
@@ -80,6 +81,10 @@ abstract class EPRouter {
           pageBuilder: (context, _, __) => DogodkiDetailsScreen(
             args: settings.arguments as DogodkiDetailsScreenArgs,
           ),
+
+      case EPRoute.fillUpCard:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => FillupScreen(),
         );
     }
 
