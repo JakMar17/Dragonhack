@@ -1,25 +1,29 @@
-<button type="button" class="btn btn-danger" (click)="logout()">
-    Logout
-</button>
+<div class="text-center m-3" id="login_title">
+    <h1>Profile</h1>
+</div>
 
-<div class="card m-3 p-3 col-sm-6">
-    <div class="card m-3">
-        <img src="../../../../../assets/images/logo.png" alt="">
-    </div>
+<div class="card m-3 p-0 col-md-4 col-8 d-flex align-items-center mx-auto">
 
-    <div *ngIf="!editMode else editModeTemp">
-        <button type="button" class="btn btn-warning" (click)="toggleEditMode()">
-            Edit
-        </button>
-        <h3>{{ username }}</h3>
-        <h3>{{ phone_number}}</h3>
+    <div class="align-self-center w-100">
+        <img class="img-fluid rounded p-2" src="../../../../../assets/images/logo.png" alt="">
+    
+        <div *ngIf="!editMode else editModeTemp" class="col-12">
+            <h3>{{ username }}</h3>
+            <h3>{{ phone_number}}</h3>
+
+            <div class="d-flex justify-content-center">
+                <button type="button" class="m-3 btn btn-outline-dark" (click)="toggleEditMode()">
+                    Edit
+                </button>
+                <button type="button" class="m-3 btn btn-outline-danger" (click)="logout()">
+                    Logout
+                </button>
+            </div>
+        </div>
     </div>
 
     <ng-template #editModeTemp>
-        <div>
-            <button type="button" class="btn btn-success" (click)="toggleEditMode()">
-                Save
-            </button>
+        <div class="col-12 p-2">
             <div class="form-group">
                 <input 
                     type="text" 
@@ -40,6 +44,11 @@
                     placeholder="Phone number"
                     aria-describedby="emailHelp">
             </div>
+            <button type="button" class="btn btn-outline-success" (click)="toggleEditMode()">
+                Save
+            </button>
         </div>
     </ng-template>
+
+    
 </div>
