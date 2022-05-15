@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:blagajna/styles/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -13,6 +14,7 @@ class QrReader extends StatefulWidget {
 
 class _QrReaderState extends State<QrReader> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final TextEditingController _inputController = TextEditingController();
   Barcode? result;
   QRViewController? controller;
 
@@ -33,22 +35,31 @@ class _QrReaderState extends State<QrReader> {
     return Scaffold(
       body: Column(
         children: <Widget>[
+          TextField(
+            readOnly: true,
+            controller: _inputController,
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(color: ThemeColors.backeground),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(color: ThemeColors.backeground),
+              ),
+              label: Text("Card number", style: TextStyle(color: Colors.black)),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Expanded(
-            flex: 5,
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  : Text('Scan a code'),
-            ),
-          )
         ],
       ),
     );
@@ -59,6 +70,9 @@ class _QrReaderState extends State<QrReader> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (result != null) {
+          _inputController.text = result!.code ?? '';
+        }
       });
     });
   }
