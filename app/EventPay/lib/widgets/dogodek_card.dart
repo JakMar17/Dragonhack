@@ -27,12 +27,15 @@ class DogodekCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: onTap,
       child: Stack(
+        alignment: Alignment.bottomRight,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(12.0)),
               image: DecorationImage(
@@ -41,44 +44,65 @@ class DogodekCard extends StatelessWidget {
               ),
             ),
             width: double.infinity,
-            height: 200,
+            height: h * 0.26,
           ),
-          Positioned(
-            child: Text(
-              datum.split("T")[0],
-              style: const TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              color: EPColor.almostBlack.withOpacity(0.25)
             ),
-            top: 60,
-            left: 15,
+            width: double.infinity,
+            height: h * 0.26,
           ),
-          Positioned(
-            child: Text(
-              kraj,
-              style: const TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+          Padding(
+            padding: EdgeInsets.only(right: w * 0.04, bottom: h * 0.025),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      kraj,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Icon(Icons.location_city, color: Colors.white,)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      datum.split("T")[0],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Icon(Icons.calendar_month, color: Colors.white,)
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text(
+                    naslov,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            top: 90,
-            left: 15,
-          ),
-          Positioned(
-            child: Text(
-              naslov,
-              style: const TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            bottom: 15,
-            left: 15,
-          ),
+          )
         ],
       ),
     );

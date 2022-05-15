@@ -80,7 +80,7 @@ abstract class EPRouter {
         return PageRouteBuilder(
           pageBuilder: (context, _, __) => DogodkiDetailsScreen(
             args: settings.arguments as DogodkiDetailsScreenArgs,
-          ),
+          ),);
 
       case EPRoute.fillUpCard:
         return PageRouteBuilder(

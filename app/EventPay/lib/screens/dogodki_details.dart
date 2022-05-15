@@ -52,15 +52,18 @@ class _DogodkiDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formatter = DateFormat('dd. MM. yyyy');
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
+
     return BlocBuilder<DogodkiBloc, DogodkiState>(
       builder: (context, state) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            backgroundColor: EPColor.backgroud,
-            middle: Text(
-              "Super event 12",
-              style: EPStyles.pageTitleTextStyle(context),
-            ),
+            backgroundColor: Colors.transparent,
+            // middle: Text(
+            //   "Super event 12",
+            //   style: EPStyles.pageTitleTextStyle(context),
+            // ),
           ),
           child: BlocBuilder<DogodkiBloc, DogodkiState>(
             builder: (context, state) {
@@ -75,6 +78,7 @@ class _DogodkiDetailsScreen extends StatelessWidget {
               if (state.cards != null) {
                 final card = state.cards![args.index];
                 return Stack(
+                  alignment: Alignment.bottomCenter,
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -88,6 +92,71 @@ class _DogodkiDetailsScreen extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                     ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: EPColor.almostBlack.withOpacity(0.45)),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(bottom: h * 0.04, right: w * 0.04),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            card.eventName,
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w300),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "${formatter.format(DateTime.parse(card.startDate))} - ${formatter.format(DateTime.parse(card.endDate))}",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                card.location,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                Icons.location_city,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 );
               }
