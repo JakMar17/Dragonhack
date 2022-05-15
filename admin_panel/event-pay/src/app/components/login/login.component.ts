@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, finalize, map, of } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +11,39 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(protected router: Router) { }
+  username: any = '';
+  password: any = '';
+  isWrongUsernameOrPassword: boolean = false;
+
+  constructor(
+    protected router: Router,
+    private authService: AuthenticationService
+    ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('user')) {
+      this.redirect();
+    }
   }
 
   login(): void {
-    console.log("sdeasdasd")
-    this.router.navigate(['../dashboard'])
-      .catch((navigateErr) => console.error(navigateErr));
+    if (this.username === '' || this.password === '') return;
+    this.authService.loginWithCredentials({'username':this.username, 'password':this.password})
+    .toPromise()
+    .then(res => this.loginUser(res))
+    .catch(err => this.isWrongUsernameOrPassword = true);
+  }
+
+  private loginUser(res: any) {debugger;
+    localStorage.setItem('username', res.username);
+    localStorage.setItem('firstname', res.firstname);
+    localStorage.setItem('lastname', res.lastname);
+    localStorage.setItem('email', res.email);
+    this.redirect();
+  }
+
+  private redirect(): void {
+    this.router.navigateByUrl('home');
   }
 
 }

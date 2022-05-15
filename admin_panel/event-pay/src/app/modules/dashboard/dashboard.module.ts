@@ -6,13 +6,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActiveEventsComponent } from './components/active-events/active-events.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { EventComponent } from './components/event/event.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ActiveEventsComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    EventComponent
   ],
   imports: [
     CommonModule,

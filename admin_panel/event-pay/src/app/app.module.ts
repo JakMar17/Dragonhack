@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { BackboneComponent } from './modules/share/backbone/backbone.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
