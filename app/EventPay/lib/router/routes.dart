@@ -9,4 +9,6 @@ abstract class EPRoute {
   static const String profil = '/profil';
   static const List<String> tabNames = [kartice, dogodki, profil];
   static const String karticaDetailsScreen = '/karticaDetailsScreen';
+  static const String dogodkiDetailsScreen = '/dogodkiDetailsScreen';
+  static const String fillUpCard = '/card/fillUp';
 }

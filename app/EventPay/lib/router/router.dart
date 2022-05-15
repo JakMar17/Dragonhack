@@ -1,5 +1,7 @@
+import 'package:eventpay/screens/fillup_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/dogodki_details.dart';
 import '../screens/kartica_details.dart';
 import '../screens/root.dart';
 import '../screens/tabs/dogodki.dart';
@@ -73,6 +75,16 @@ abstract class EPRouter {
       case EPRoute.karticaDetailsScreen:
         return PageRouteBuilder(
           pageBuilder: (context, _, __) => const KarticaDetailsScreen(),
+        );
+      case EPRoute.dogodkiDetailsScreen:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => DogodkiDetailsScreen(
+            args: settings.arguments as DogodkiDetailsScreenArgs,
+          ),
+
+      case EPRoute.fillUpCard:
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => FillupScreen(),
         );
     }
 
