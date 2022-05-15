@@ -1,6 +1,7 @@
 import 'package:blagajna/qr_reader/qr_reader.dart';
 import 'package:blagajna/screens/events_screen.dart';
 import 'package:blagajna/screens/login_screen.dart';
+import 'package:blagajna/screens/order_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       routes: {
         '/events': (context) => EventsScreen(),
+        '/order': (context) => OrderScreen()
       },
     );
   }

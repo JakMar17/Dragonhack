@@ -23,7 +23,7 @@ public class AdminEventsApi {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public List<EventDto> getOrganizationEvents(@RequestHeader("WorkerUsername") String workerUsername) throws DataNotFoundException {
+    public List<EventDto> getOrganizationEvents(@RequestHeader(value = "WorkerUsername", defaultValue = "janez") String workerUsername) throws DataNotFoundException {
         return eventServices.getOrganizationEvents(workerUsername);
     }
 
