@@ -1,4 +1,5 @@
 import 'package:blagajna/data/events_repo.dart';
+import 'package:blagajna/data/models/event_model.dart';
 import 'package:blagajna/qr_reader/qr_reader.dart';
 import 'package:blagajna/screens/event_card.dart';
 import 'package:blagajna/styles/colors.dart';
@@ -14,20 +15,17 @@ class EventsScreen extends StatefulWidget {
 
 class _EventsScreenState extends State<EventsScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  bool loading = true;
-
-  Barcode? result;
-  QRViewController? controller;
+  List<EventModel>? events;
 
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
 
-    if (loading) {
+    if (events == null) {
       final eventRepo = EventsRepo();
       eventRepo.getEvents().then((value) {
-        setState(() => loading = false);
+        setState(() => events = value);
       });
       return Scaffold(
         backgroundColor: ThemeColors.backeground,
@@ -63,16 +61,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 Expanded(
                   child: CustomScrollView(
                     physics: BouncingScrollPhysics(),
-                    slivers: [
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                      EventCard(),
-                    ],
+                    slivers: [for (var event in events!) EventCard(event)],
                   ),
                 ),
               ]),

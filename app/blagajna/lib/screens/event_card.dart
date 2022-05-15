@@ -1,10 +1,10 @@
+import 'package:blagajna/data/models/event_model.dart';
 import 'package:blagajna/styles/colors.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class EventCard extends StatelessWidget {
-  final String image = "";
-  const EventCard({Key? key}) : super(key: key);
+  final EventModel event;
+  const EventCard(this.event, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class EventCard extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(context, "/order", arguments: 123),
+        onTap: () => Navigator.pushNamed(context, "/order", arguments: event.eventId),
         child: Card(
           child: Container(
             height: h * 0.25,
@@ -21,7 +21,7 @@ class EventCard extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
-                    "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"),
+                    event.image),
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
               ),
@@ -34,7 +34,7 @@ class EventCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Ime eventa", style: TextStyle(color: Colors.white, fontSize: 24),)
+                    Text(event.eventName, style: TextStyle(color: Colors.white, fontSize: 24),)
                   ],
                 ),
               ),

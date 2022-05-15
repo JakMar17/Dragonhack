@@ -1,3 +1,6 @@
+import 'package:blagajna/data/events_repo.dart';
+import 'package:blagajna/data/login_repo.dart';
+import 'package:blagajna/data/models/order_post_model.dart';
 import 'package:blagajna/qr_reader/qr_reader.dart';
 import 'package:blagajna/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +58,10 @@ class _OrderScreenState extends State<OrderScreen> {
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(color: _qrInputController.text.isNotEmpty ? Colors.green : Colors.white24),
+                borderSide: BorderSide(
+                    color: _qrInputController.text.isNotEmpty
+                        ? Colors.green
+                        : Colors.white24),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -97,30 +103,43 @@ class _OrderScreenState extends State<OrderScreen> {
           ),
           GestureDetector(
             onTap: () {
-              
+              if (_priceController.text.isNotEmpty &&
+                  _qrInputController.text.isNotEmpty) {
+                var orderModel = OrderPostModel(
+                    cardNumber: _qrInputController.text,
+                    amount: double.parse(_priceController.text),
+                    workerUsername: LoginRepo.username ?? 'janez');
+                var eventsRepo = EventsRepo();
+                eventsRepo.postTransaction(orderModel).then((value) {
+                  var mes =
+                      value ? "Transaction was successful" : "Balance too low";
+                  Navigator.pushNamed(context, "/events");
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(mes)
+                  ));
+                });
+              }
             },
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: ThemeColors.orange),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Create order",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                            Icons.shopping_bag,
-                            color: Colors.white,
-                          ),
-                        ],
-                      )
-              ),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Create order",
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Icon(
+                        Icons.shopping_bag,
+                        color: Colors.white,
+                      ),
+                    ],
+                  )),
             ),
           ),
           SizedBox(
