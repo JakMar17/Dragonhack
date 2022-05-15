@@ -60,9 +60,27 @@ class _ProfilTab extends StatelessWidget {
             return const SizedBox();
           }
           return Stack(
-            children: const [
-              CustomScrollView(
-                slivers: [],
+            children: [
+              Positioned(
+                bottom: 24,
+                left: 18,
+                right: 18,
+                child: VecTextShadowButton.filled(
+                  textStyle: EPStyles.buttonTextStyle(context),
+                  text: "Log out",
+                  color: EPColor.orange,
+                  onPressed: () async {
+                    _globalBloc.reset();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushReplacementNamed(
+                      EPRoute.signIn,
+                      arguments: SignInScreenArgs(
+                        username: '',
+                        password: '',
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           );

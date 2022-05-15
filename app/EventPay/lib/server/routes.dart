@@ -7,4 +7,6 @@ abstract class EPServerRoute {
   static const String apiAuthRefresh = 'refresh';
   static const String apiAuthEvents = 'events';
   static const String apiAuthCards = 'cards';
+  static const String apiAuthTransactions = 'transactins';
+  static const String apiAuthTransactionsFillup = 'fillup';
 }

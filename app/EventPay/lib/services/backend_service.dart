@@ -91,4 +91,32 @@ class BackendService {
         return error(BackendFailure.fromStatusCode(response.statusCode));
     }
   }
+
+  Future<Either<BackendFailure, bool>> postFillup(
+      String cardNumber, double amount) async {
+    final GlobalBloc _globalBloc = GlobalBloc.instance;
+    final http.Response? response = await _http.post(
+      [
+        EPServerRoute.apiAuthTransactions,
+        EPServerRoute.apiAuthTransactionsFillup,
+      ],
+      headers: <String, String>{
+        'Username': _globalBloc.state.user!.username,
+      },
+      body: <String, dynamic>{
+        'cardNumber': cardNumber,
+        'amount': amount,
+      },
+    );
+    if (response == null) return error(const UnknownBackendFailure());
+
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        return value(jsonDecode(response.body));
+      case HttpStatus.unauthorized:
+        return error(const UnauthorizedBackendFailure());
+      default:
+        return error(BackendFailure.fromStatusCode(response.statusCode));
+    }
+  }
 }
